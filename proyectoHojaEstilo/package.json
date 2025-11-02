@@ -1,7 +1,7 @@
 {
-  "name": "proyecto-final-hoja-de-estilo",
+  "name": "proyectohojaestilo",
   "version": "1.0.0",
-  "description": "Proyecto final universitario - UTP, Desarrollo de una academia educativa",
+  "description": "",
   "main": "index.js",
   "dependencies": {
     "@tailwindcss/cli": "^4.1.16",
@@ -23,22 +23,16 @@
     "picocolors": "^1.1.1",
     "picomatch": "^2.3.1",
     "source-map-js": "^1.2.1",
-    "tailwindcss": "^4.1.16",
     "tapable": "^2.3.0",
     "to-regex-range": "^5.0.1"
   },
-  "scripts": {
-    "Build:styles": "npx @tailwindcss/cli -i ./proyectoHojaEstilo/src/main/resources/static/css/input.css -o ./proyectoHojaEstilo/src/main/resources/static/css/output.css --watch"
+  "devDependencies": {
+    "tailwindcss": "^4.1.16"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Fabriziofc12/Proyecto-Final-Hoja-de-Estilo.git"
+  "scripts": {
+    "build:styles": "npx tailwindcss -i ./src/main/resources/static/css/input.css -o ./src/main/resources/static/css/output.css --watch"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Fabriziofc12/Proyecto-Final-Hoja-de-Estilo/issues"
-  },
-  "homepage": "https://github.com/Fabriziofc12/Proyecto-Final-Hoja-de-Estilo#readme"
+  "license": "ISC"
 }

@@ -1,24 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Header Responsive</title>
+  <link href="/css/output.css" rel="stylesheet" />
 </head>
-<body>
-    <div class="d-flex">
-        <div>
-            <h1>Hola mundo</h1>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis, consequatur veritatis. Eaque non aliquid hic nemo esse aspernatur. Quos neque qui quasi! Repellendus tempore ipsum qui quia, consequuntur corporis quam.</p>
+<body class="bg-gray-100">
+  <header class="bg-white shadow-md">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Logo -->
+        <div class="flex items-center">
+          <span class="ml-2 text-xl font-semibold text-gray-700">Mi Sitio</span>
         </div>
-        <div>
-            <h1>Hola mundo</h1>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis, consequatur veritatis. Eaque non aliquid hic nemo esse aspernatur. Quos neque qui quasi! Repellendus tempore ipsum qui quia, consequuntur corporis quam.</p>
+        
+        <!-- Botón hamburguesa (solo en móvil) -->
+        <div class="md:hidden">
+          <button id="menu-btn" class="text-gray-700 hover:text-gray-900 focus:outline-none">
+            <!-- Ícono hamburguesa -->
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
         </div>
-        <div>
-            <h1>Hola mundo</h1>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis, consequatur veritatis. Eaque non aliquid hic nemo esse aspernatur. Quos neque qui quasi! Repellendus tempore ipsum qui quia, consequuntur corporis quam.</p>
+
+        <!-- Menú de navegación -->
+        <div id="menu" class="hidden md:flex space-x-6">
+          <a href="#" class="text-gray-700 hover:text-blue-600 transition">Inicio</a>
+          <a href="#" class="text-gray-700 hover:text-blue-600 transition">Servicios</a>
+          <a href="#" class="text-gray-700 hover:text-blue-600 transition">Blog</a>
+          <a href="#" class="text-gray-700 hover:text-blue-600 transition">Contacto</a>
         </div>
+      </div>
+    </nav>
+
+    <!-- Menú móvil -->
+    <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2">
+      <a href="#" class="block text-gray-700 hover:text-blue-600 transition">Inicio</a>
+      <a href="#" class="block text-gray-700 hover:text-blue-600 transition">Servicios</a>
+      <a href="#" class="block text-gray-700 hover:text-blue-600 transition">Blog</a>
+      <a href="#" class="block text-gray-700 hover:text-blue-600 transition">Contacto</a>
     </div>
+  </header>
+
+  <script>
+    // Script para abrir/cerrar el menú móvil
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
 </body>
 </html>
