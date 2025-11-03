@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 @Controller
-public class indexController {
+public class HomeController {
     @GetMapping("/Index")
     public String getIndex(Model model) {
             model.addAttribute("titulo", "Página de Inicio");
