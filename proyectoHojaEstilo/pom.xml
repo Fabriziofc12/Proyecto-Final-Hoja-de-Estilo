@@ -89,31 +89,6 @@
         </plugin>
 
         <!-- Plugin para ejecutar Tailwind automáticamente -->
-        <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>exec-maven-plugin</artifactId>
-            <version>3.2.0</version>
-            <executions>
-                <execution>
-                    <id>run-tailwind</id>
-                    <phase>generate-resources</phase>
-                    <goals>
-                        <goal>exec</goal>
-                    </goals>
-                    <configuration>
-                        <executable>npx</executable>
-                        <arguments>
-                            <argument>tailwindcss</argument>
-                            <argument>-i</argument>
-                            <argument>./src/main/resources/static/css/input.css</argument>
-                            <argument>-o</argument>
-                            <argument>./src/main/resources/static/css/output.css</argument>
-                            <argument>--watch</argument>
-                        </arguments>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
 
     </plugins>
 </build>

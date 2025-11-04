@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.thymleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Header Responsive</title>
+    <link rel="stylesheet" href="/css/contacto.css" />
+    <link href="/css/output.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <main>
+        <div th:replace="fragments/header :: header"></div>
+        <div class="contacto-contenedor">
+            <div class="formulario fade-in">
+            <h1>Contáctanos</h1>
+            <p>Completa el siguiente formulario y nos pondremos en contacto contigo pronto.</p>
+
+            <form>
+                <div class="campo">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" placeholder="Tu nombre" required>
+                </div>
+
+                <div class="campo">
+                <label for="correo">Correo electrónico</label>
+                <input type="email" id="correo" placeholder="Tu correo" required>
+                </div>
+
+                <div class="campo">
+                <label for="mensaje">Mensaje</label>
+                <textarea id="mensaje" rows="5" placeholder="Escribe tu mensaje..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn">Enviar mensaje</button>
+            </form>
+            </div>
+        </div>
+
+    </main>
+    <script>
+        // Script para abrir/cerrar el menú móvil
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+
+</html>

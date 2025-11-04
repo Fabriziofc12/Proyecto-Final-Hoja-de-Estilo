@@ -1,0 +1,115 @@
+/****************************
+ * VARIABLES
+ ****************************/
+/****************************
+ * MIXINS
+ ****************************/
+/****************************
+ * ANIMACIONES
+ ****************************/
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/****************************
+ * ESTILOS GLOBALES
+ ****************************/
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #f9fafb;
+  color: #1f2937;
+}
+/****************************
+ * CONTENEDOR DE CONTACTO
+ ****************************/
+.contacto-contenedor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  padding: 2rem;
+  background: linear-gradient(135deg, #a49ff2, #4f46e5);
+}
+.formulario {
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 1rem;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.formulario h1 {
+  color: #4f46e5;
+  margin-bottom: 0.5rem;
+}
+.formulario p {
+  color: #030506;
+  margin-bottom: 2rem;
+}
+.formulario form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.formulario form .campo {
+  text-align: left;
+}
+.formulario form .campo label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.formulario form .campo input,
+.formulario form .campo textarea {
+  border: 1px solid #93a7c2;
+  border-radius: 8px;
+  padding: 0.7rem;
+  font-size: 1rem;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+.formulario form .campo input:focus,
+.formulario form .campo textarea:focus {
+  border-color: #4f46e5;
+  outline: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.formulario form .btn {
+  background-color: #4f46e5;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.formulario form .btn:hover {
+  background-color: #2d22e0;
+  transform: translateY(-2px);
+}
+/****************************
+ * ANIMACIONES DE ENTRADA
+ ****************************/
+.fade-in {
+  animation: fadeInUp 0.8s ease forwards;
+}
+/****************************
+ * FOOTER
+ ****************************/
+.footer {
+  background: #1f2937;
+  color: #ffffff;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+}

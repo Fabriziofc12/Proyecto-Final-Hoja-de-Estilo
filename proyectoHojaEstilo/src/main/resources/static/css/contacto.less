@@ -1,0 +1,146 @@
+/****************************
+ * VARIABLES
+ ****************************/
+@color-primario: #4f46e5;
+@color-fondo: #f9fafb;
+@color-texto: #1f2937;
+@color-blanco: #ffffff;
+@transicion: all 0.3s ease;
+
+/****************************
+ * MIXINS
+ ****************************/
+.sombra(@nivel: 0.1) {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, @nivel);
+}
+
+.input-estilo() {
+  border: 1px solid lighten(@color-texto, 50%);
+  border-radius: 8px;
+  padding: 0.7rem;
+  font-size: 1rem;
+  width: 100%;
+  transition: @transicion;
+
+  &:focus {
+    border-color: @color-primario;
+    outline: none;
+    .sombra(0.2);
+  }
+}
+
+.boton(@color) {
+  background-color: @color;
+  color: @color-blanco;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: @transicion;
+
+  &:hover {
+    background-color: darken(@color, 8%);
+    transform: translateY(-2px);
+  }
+}
+
+/****************************
+ * ANIMACIONES
+ ****************************/
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/****************************
+ * ESTILOS GLOBALES
+ ****************************/
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background-color: @color-fondo;
+  color: @color-texto;
+}
+
+/****************************
+ * CONTENEDOR DE CONTACTO
+ ****************************/
+.contacto-contenedor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  padding: 2rem;
+  background: linear-gradient(135deg, lighten(@color-primario, 20%), @color-primario);
+}
+
+.formulario {
+  background: @color-blanco;
+  padding: 2.5rem;
+  border-radius: 1rem;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  .sombra(0.15);
+
+  h1 {
+    color: @color-primario;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: darken(@color-texto, 15%);
+    margin-bottom: 2rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+
+    .campo {
+      text-align: left;
+
+      label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      input,
+      textarea {
+        .input-estilo();
+      }
+    }
+
+    .btn {
+      .boton(@color-primario);
+    }
+  }
+}
+
+/****************************
+ * ANIMACIONES DE ENTRADA
+ ****************************/
+.fade-in {
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+/****************************
+ * FOOTER
+ ****************************/
+.footer {
+  background: @color-texto;
+  color: @color-blanco;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+}

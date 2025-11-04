@@ -1,0 +1,180 @@
+/****************************
+ * VARIABLES
+ ****************************/
+/****************************
+ * MIXINS
+ ****************************/
+/****************************
+ * ANIMACIONES
+ ****************************/
+@keyframes aparecer {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/****************************
+ * ESTILOS GLOBALES
+ ****************************/
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f3f4f6;
+  color: #1f2937;
+}
+/****************************
+ * HEADER
+ ****************************/
+.header {
+  background-color: #4f46e5;
+  color: #ffffff;
+  text-align: center;
+  padding: 3rem 1rem;
+  /* 📱 Responsive */
+}
+.header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  transition: color 0.4s ease;
+}
+.header h1:hover {
+  color: #ffffff;
+}
+.header p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+@media (max-width: 600px) {
+  .header {
+    padding: 2rem 1rem;
+  }
+  .header h1 {
+    font-size: 1.8rem;
+  }
+  .header p {
+    font-size: 1rem;
+  }
+}
+/****************************
+ * SECCIÓN INSTRUCTORES
+ ****************************/
+.instructores {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding: 3rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  /* 📱 Media Queries para distintos tamaños */
+}
+@media (min-width: 768px) {
+  .instructores {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .instructores {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.instructores .tarjeta {
+  background: #ffffff;
+  border-radius: 1rem;
+  text-align: center;
+  padding: 2rem 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  animation: aparecer 0.8s ease both;
+}
+.instructores .tarjeta:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+.instructores .tarjeta img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 1rem auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+.instructores .tarjeta img:hover {
+  transform: rotate(5deg) scale(1.05);
+}
+.instructores .tarjeta h2 {
+  margin-bottom: 0.3rem;
+  font-size: 1.3rem;
+}
+.instructores .tarjeta h3 {
+  color: #4f46e5;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.instructores .tarjeta p {
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+.instructores .tarjeta .btn {
+  background-color: #4f46e5;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.instructores .tarjeta .btn:hover {
+  background-color: #291fd9;
+  transform: scale(1.05);
+}
+@media (max-width: 768px) {
+  .instructores .tarjeta {
+    padding: 1.5rem 0.8rem;
+  }
+  .instructores .tarjeta img {
+    width: 100px;
+    height: 100px;
+  }
+  .instructores .tarjeta h2 {
+    font-size: 1.1rem;
+  }
+  .instructores .tarjeta p {
+    font-size: 0.85rem;
+  }
+  .instructores .tarjeta .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+}
+@media (max-width: 480px) {
+  .instructores .tarjeta img {
+    width: 80px;
+    height: 80px;
+  }
+  .instructores .tarjeta h2 {
+    font-size: 1rem;
+  }
+  .instructores .tarjeta h3 {
+    font-size: 0.9rem;
+  }
+  .instructores .tarjeta p {
+    font-size: 0.8rem;
+  }
+}
+/****************************
+ * FOOTER
+ ****************************/
+.footer {
+  background-color: #1f2937;
+  color: #ffffff;
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.9rem;
+}
