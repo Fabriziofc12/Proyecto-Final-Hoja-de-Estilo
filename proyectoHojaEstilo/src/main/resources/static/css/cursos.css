@@ -1,107 +1,98 @@
-.pagina-cursos {
-  /****************************
-   * VARIABLES
-   ****************************/
-  /****************************
-   * MIXINS
-   ****************************/
-  /****************************
-   * HEADER (solo de cursos)
-   ****************************/
-  /****************************
-   * GRID DE CURSOS
-   ****************************/
-  /****************************
-   * ANIMACIÓN
-   ****************************/
+.cursos-page {
+  background: #f9fafb;
+  color: #1f2937;
+  font-family: "Inter", sans-serif;
 }
-.pagina-cursos header {
-  background-color: #10b981;
-  color: white;
+.cursos-page .hero {
   text-align: center;
-  padding: 3rem 1rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  padding: 4rem 1rem;
+  background: linear-gradient(135deg, #059669, #10b981);
+  color: white;
 }
-.pagina-cursos header h1 {
+.cursos-page .hero h1 {
   font-size: 2.5rem;
+  font-weight: 700;
   margin-bottom: 0.5rem;
 }
-.pagina-cursos header p {
+.cursos-page .hero p {
   font-size: 1.1rem;
   opacity: 0.9;
 }
-.pagina-cursos section {
-  padding: 3rem 1rem;
-}
-.pagina-cursos section .grid-cursos {
+.cursos-page .cursos-grid {
   display: grid;
   gap: 2rem;
-  grid-template-columns: 1fr;
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
-@media (min-width: 768px) {
-  .pagina-cursos section .grid-cursos {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (min-width: 1024px) {
-  .pagina-cursos section .grid-cursos {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-.pagina-cursos section .grid-cursos .tarjeta {
+.cursos-page .cursos-grid .curso-card {
   background: white;
-  border-radius: 1rem;
+  border-radius: 16px;
   overflow: hidden;
-  text-align: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInUp 0.6s ease both;
 }
-.pagina-cursos section .grid-cursos .tarjeta:hover {
+.cursos-page .cursos-grid .curso-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
-.pagina-cursos section .grid-cursos .tarjeta img {
+.cursos-page .cursos-grid .curso-card img {
   width: 100%;
   height: 200px;
   object-fit: cover;
 }
-.pagina-cursos section .grid-cursos .tarjeta .contenido {
+.cursos-page .cursos-grid .curso-card .info {
   padding: 1.5rem;
 }
-.pagina-cursos section .grid-cursos .tarjeta .contenido h2 {
-  color: #10b981;
-  font-size: 1.3rem;
+.cursos-page .cursos-grid .curso-card .info h2 {
+  color: #059669;
+  font-size: 1.25rem;
+  font-weight: 700;
   margin-bottom: 0.5rem;
 }
-.pagina-cursos section .grid-cursos .tarjeta .contenido p {
+.cursos-page .cursos-grid .curso-card .info p {
   font-size: 0.95rem;
   color: #0d1116;
   margin-bottom: 1rem;
 }
-.pagina-cursos section .grid-cursos .tarjeta .contenido .btn {
-  background-color: #059669;
+.cursos-page .cursos-grid .curso-card .info .btn {
+  background: #059669;
   color: white;
+  padding: 10px 16px;
   border: none;
   border-radius: 8px;
-  padding: 0.6rem 1.2rem;
-  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
-.pagina-cursos section .grid-cursos .tarjeta .contenido .btn:hover {
-  background-color: #036546;
+.cursos-page .cursos-grid .curso-card .info .btn:hover {
+  background: #10b981;
   transform: scale(1.05);
 }
-@keyframes aparecer {
-  0% {
+@keyframes fadeInUp {
+  from {
     opacity: 0;
     transform: translateY(20px);
   }
-  100% {
+  to {
     opacity: 1;
     transform: translateY(0);
   }
 }
-.pagina-cursos .tarjeta {
-  animation: aparecer 0.8s ease both;
+@media (max-width: 768px) {
+  .hero {
+    padding: 2rem 1rem;
+  }
+  .hero h1 {
+    font-size: 2rem;
+  }
+  .hero p {
+    font-size: 1rem;
+  }
+  .cursos-grid {
+    padding: 2rem 1rem;
+    gap: 1.5rem;
+  }
 }

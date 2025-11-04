@@ -1,49 +1,45 @@
-.pagina-cursos {
-  /****************************
-   * VARIABLES
-   ****************************/
-  @color-principal: #10b981;
-  @color-secundario: #f9fafb;
-  @color-texto: #1f2937;
-  @color-boton: #059669;
-  @color-boton-hover: darken(@color-boton, 10%);
-  @transicion: all 0.3s ease;
+// Variables
+@primary: #059669;
+@secondary: #10b981;
+@bg-light: #f9fafb;
+@text-dark: #1f2937;
 
-  /****************************
-   * MIXINS
-   ****************************/
-  .sombra(@nivel: 0.1) {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, @nivel);
+// Mixins
+.card-shadow() {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-style() {
+  background: @primary;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    background: @secondary;
+    transform: scale(1.05);
   }
+}
 
-  .boton() {
-    background-color: @color-boton;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 0.6rem 1.2rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: @transicion;
+// Página de cursos
+.cursos-page {
+  background: @bg-light;
+  color: @text-dark;
+  font-family: "Inter", sans-serif;
 
-    &:hover {
-      background-color: @color-boton-hover;
-      transform: scale(1.05);
-    }
-  }
-
-  /****************************
-   * HEADER (solo de cursos)
-   ****************************/
-  header {
-    background-color: @color-principal;
-    color: white;
+  .hero {
     text-align: center;
-    padding: 3rem 1rem;
-    .sombra(0.15);
+    padding: 4rem 1rem;
+    background: linear-gradient(135deg, @primary, @secondary);
+    color: white;
 
     h1 {
       font-size: 2.5rem;
+      font-weight: 700;
       margin-bottom: 0.5rem;
     }
 
@@ -53,82 +49,85 @@
     }
   }
 
-  /****************************
-   * GRID DE CURSOS
-   ****************************/
-  section {
-    padding: 3rem 1rem;
+  .cursos-grid {
+    display: grid;
+    gap: 2rem;
+    padding: 3rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 
-    .grid-cursos {
-      display: grid;
-      gap: 2rem;
-      grid-template-columns: 1fr;
+    .curso-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      .card-shadow();
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeInUp 0.6s ease both;
 
-      @media (min-width: 768px) {
-        grid-template-columns: repeat(2, 1fr);
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
       }
 
-      @media (min-width: 1024px) {
-        grid-template-columns: repeat(3, 1fr);
+      img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
       }
 
-      .tarjeta {
-        background: white;
-        border-radius: 1rem;
-        overflow: hidden;
-        text-align: center;
-        .sombra(0.1);
-        transition: @transicion;
+      .info {
+        padding: 1.5rem;
 
-        &:hover {
-          transform: translateY(-5px);
-          .sombra(0.25);
+        h2 {
+          color: @primary;
+          font-size: 1.25rem;
+          font-weight: 700;
+          margin-bottom: 0.5rem;
         }
 
-        img {
-          width: 100%;
-          height: 200px;
-          object-fit: cover;
+        p {
+          font-size: 0.95rem;
+          color: darken(@text-dark, 10%);
+          margin-bottom: 1rem;
         }
 
-        .contenido {
-          padding: 1.5rem;
-
-          h2 {
-            color: @color-principal;
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-          }
-
-          p {
-            font-size: 0.95rem;
-            color: darken(@color-texto, 10%);
-            margin-bottom: 1rem;
-          }
-
-          .btn {
-            .boton();
-          }
+        .btn {
+          .btn-style();
         }
       }
     }
   }
+}
 
-  /****************************
-   * ANIMACIÓN
-   ****************************/
-  @keyframes aparecer {
-    0% {
-      opacity: 0;
-      transform: translateY(20px);
+// Animaciones
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Media Queries
+@media (max-width: 768px) {
+  .hero {
+    padding: 2rem 1rem;
+
+    h1 {
+      font-size: 2rem;
     }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
+
+    p {
+      font-size: 1rem;
     }
   }
 
-  .tarjeta {
-    animation: aparecer 0.8s ease both;
+  .cursos-grid {
+    padding: 2rem 1rem;
+    gap: 1.5rem;
   }
 }

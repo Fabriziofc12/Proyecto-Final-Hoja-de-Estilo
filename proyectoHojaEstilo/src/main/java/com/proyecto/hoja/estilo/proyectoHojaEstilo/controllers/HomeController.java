@@ -25,8 +25,8 @@ public class HomeController {
     public String getInstructores() {
         return "Instructores";
     }
-    @GetMapping("/Cursos")
-    public String getCursos() {
-        return "Cursos";
+    @GetMapping("/Eventos")
+    public String getEventos() {
+        return "Eventos";
     } 
 }
