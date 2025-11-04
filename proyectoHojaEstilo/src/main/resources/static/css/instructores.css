@@ -30,7 +30,7 @@ body {
  * HEADER
  ****************************/
 .header {
-  background-color: #4f46e5;
+  background-color: #00af66;
   color: #ffffff;
   text-align: center;
   padding: 3rem 1rem;
@@ -111,7 +111,7 @@ body {
   font-size: 1.3rem;
 }
 .instructores .tarjeta h3 {
-  color: #4f46e5;
+  color: #00af66;
   font-weight: 600;
   margin-bottom: 1rem;
 }
@@ -121,7 +121,7 @@ body {
   line-height: 1.4;
 }
 .instructores .tarjeta .btn {
-  background-color: #4f46e5;
+  background-color: #00af66;
   color: #ffffff;
   border: none;
   border-radius: 8px;
@@ -131,7 +131,7 @@ body {
   transition: all 0.3s ease;
 }
 .instructores .tarjeta .btn:hover {
-  background-color: #291fd9;
+  background-color: #007c48;
   transform: scale(1.05);
 }
 @media (max-width: 768px) {

@@ -1,36 +1,111 @@
 <div th:fragment="header">
-   <header class="bg-white shadow-md">
-        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center">
-                    <a th:href="@{/Index}"><span class="ml-2 text-xl font-bold text-gray-700">LOGO</span></a>
-                </div>
-
-                <!-- Botón hamburguesa (solo en móvil) -->
-                <div class="md:hidden">
-                    <button id="menu-btn" class="text-gray-700 hover:text-gray-900 focus:outline-none">
-                        <!-- Ícono hamburguesa -->
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
-
-                <!-- Menú de navegación -->
-                <div id="menu" class="hidden md:flex space-x-6">
-                    <a th:href="@{Cursos}" class="text-gray-700 hover:text-blue-600 transition">Cursos</a>
-                    <a th:href="@{Instructores}" class="text-gray-700 hover:text-blue-600 transition">Instructores</a>
-                    <a th:href="@{Contacto}" class="text-gray-700 hover:text-blue-600 transition">Contacto</a>
-                </div>
-            </div>
-        </nav>
-
-        <!-- Menú móvil -->
-        <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2">
-            <a href="#" class="block text-gray-700 hover:text-blue-600 transition">Cursos</a>
-            <a href="#" class="block text-gray-700 hover:text-blue-600 transition">Instructores</a>
-            <a href="#" class="block text-gray-700 hover:text-blue-600 transition">Contacto</a>
+  <header class="bg-gray-800 shadow-md relative">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center">
+          <a th:href="@{/Index}">
+            <span class="ml-2 text-xl font-extrabold text-emerald-600">SMART ACADEMY</span>
+          </a>
         </div>
-    </header>
+
+        <!-- Botón hamburguesa (solo móvil) -->
+        <div class="md:hidden">
+          <button id="menu-btn" class="text-white hover:text-emerald-400 focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Menú de navegación -->
+        <div id="menu" class="hidden md:flex space-x-6">
+          <a th:href="@{Cursos}" class="text-white py-2 px-3 rounded-sm hover:bg-emerald-600 transition duration-500">Cursos</a>
+          <a th:href="@{Instructores}" class="text-white py-2 px-3 rounded-sm hover:bg-emerald-600 transition duration-500">Instructores</a>
+          <a th:href="@{Contacto}" class="text-white py-2 px-3 rounded-sm hover:bg-emerald-600 transition duration-500">Contacto</a>
+          <button id="loginBtn" class="py-2 px-3 rounded-sm bg-emerald-600 text-white hover:scale-110 transition duration-500">Login</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Menú móvil -->
+    <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2">
+      <a th:href="@{Cursos}" class="block text-white py-2 px-3 rounded-sm hover:bg-emerald-600 transition duration-500">Cursos</a>
+      <a th:href="@{Instructores}" class="block text-white py-2 px-3 rounded-sm hover:bg-emerald-600 transition duration-500">Instructores</a>
+      <a th:href="@{Contacto}" class="block text-white py-2 px-3 rounded-sm hover:bg-emerald-600 transition duration-500">Contacto</a>
+      <button id="loginBtnMobile" class="block w-full text-left text-white py-2 px-3 rounded-sm hover:bg-emerald-600 transition duration-500">Login</button>
+    </div>
+  </header>
+
+  <!-- MODAL LOGIN -->
+  <div id="loginModal" class="fixed inset-0 hidden z-50 flex items-center justify-center bg-gray-900/40 backdrop-blur-sm">
+    <div class="bg-white rounded-xl p-6 w-11/12 max-w-md relative animate-fade-in shadow-lg">
+      <button id="closeModal" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+      <h2 class="text-2xl font-bold text-center text-emerald-600 mb-4">Iniciar Sesión</h2>
+      <form class="space-y-4">
+        <div>
+          <label for="email" class="block text-gray-700 font-semibold mb-1">Correo electrónico</label>
+          <input type="email" id="email" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:outline-none" required />
+        </div>
+        <div>
+          <label for="password" class="block text-gray-700 font-semibold mb-1">Contraseña</label>
+          <input type="password" id="password" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:outline-none" required />
+        </div>
+        <button type="submit" class="w-full bg-emerald-600 text-white font-semibold py-2 rounded-lg hover:bg-emerald-700 transition">Entrar</button>
+
+        <!-- Botón de Registro -->
+        <button type="button" id="registerBtn" class="w-full border-2 border-emerald-600 text-emerald-600 font-semibold py-2 rounded-lg hover:bg-emerald-50 transition">Registrar</button>
+      </form>
+    </div>
+  </div>
+
+  <style>
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 0.3s ease-out;
+    }
+  </style>
+
+  <script>
+    // Menú móvil
+    const menuBtn = document.getElementById("menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+
+    // Modal Login
+    const loginBtn = document.getElementById("loginBtn");
+    const loginBtnMobile = document.getElementById("loginBtnMobile");
+    const modal = document.getElementById("loginModal");
+    const closeModal = document.getElementById("closeModal");
+    const registerBtn = document.getElementById("registerBtn");
+
+    const openModal = () => modal.classList.remove("hidden");
+    const hideModal = () => modal.classList.add("hidden");
+
+    loginBtn.addEventListener("click", openModal);
+    loginBtnMobile.addEventListener("click", openModal);
+    closeModal.addEventListener("click", hideModal);
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) hideModal();
+    });
+
+    // Acción del botón "Registrar"
+    registerBtn.addEventListener("click", () => {
+      alert("Redirigiendo a la página de registro...");
+      // Aquí puedes redirigir al usuario:
+      // window.location.href = '/Registro';
+    });
+  </script>
 </div>

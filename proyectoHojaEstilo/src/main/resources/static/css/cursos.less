@@ -1,0 +1,134 @@
+.pagina-cursos {
+  /****************************
+   * VARIABLES
+   ****************************/
+  @color-principal: #10b981;
+  @color-secundario: #f9fafb;
+  @color-texto: #1f2937;
+  @color-boton: #059669;
+  @color-boton-hover: darken(@color-boton, 10%);
+  @transicion: all 0.3s ease;
+
+  /****************************
+   * MIXINS
+   ****************************/
+  .sombra(@nivel: 0.1) {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, @nivel);
+  }
+
+  .boton() {
+    background-color: @color-boton;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: @transicion;
+
+    &:hover {
+      background-color: @color-boton-hover;
+      transform: scale(1.05);
+    }
+  }
+
+  /****************************
+   * HEADER (solo de cursos)
+   ****************************/
+  header {
+    background-color: @color-principal;
+    color: white;
+    text-align: center;
+    padding: 3rem 1rem;
+    .sombra(0.15);
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+  }
+
+  /****************************
+   * GRID DE CURSOS
+   ****************************/
+  section {
+    padding: 3rem 1rem;
+
+    .grid-cursos {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: 1fr;
+
+      @media (min-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @media (min-width: 1024px) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .tarjeta {
+        background: white;
+        border-radius: 1rem;
+        overflow: hidden;
+        text-align: center;
+        .sombra(0.1);
+        transition: @transicion;
+
+        &:hover {
+          transform: translateY(-5px);
+          .sombra(0.25);
+        }
+
+        img {
+          width: 100%;
+          height: 200px;
+          object-fit: cover;
+        }
+
+        .contenido {
+          padding: 1.5rem;
+
+          h2 {
+            color: @color-principal;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+          }
+
+          p {
+            font-size: 0.95rem;
+            color: darken(@color-texto, 10%);
+            margin-bottom: 1rem;
+          }
+
+          .btn {
+            .boton();
+          }
+        }
+      }
+    }
+  }
+
+  /****************************
+   * ANIMACIÓN
+   ****************************/
+  @keyframes aparecer {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .tarjeta {
+    animation: aparecer 0.8s ease both;
+  }
+}

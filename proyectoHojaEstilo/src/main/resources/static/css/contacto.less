@@ -1,11 +1,12 @@
 /****************************
  * VARIABLES
  ****************************/
-@color-primario: #4f46e5;
-@color-fondo: #f9fafb;
+@color-primario: #00af66;
+@color-secundario: #f9fafb;
 @color-texto: #1f2937;
 @color-blanco: #ffffff;
-@transicion: all 0.3s ease;
+@color-borde: #d1d5db;
+@transicion-base: all 0.3s ease;
 
 /****************************
  * MIXINS
@@ -14,50 +15,43 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, @nivel);
 }
 
-.input-estilo() {
-  border: 1px solid lighten(@color-texto, 50%);
-  border-radius: 8px;
-  padding: 0.7rem;
-  font-size: 1rem;
+.input-base() {
   width: 100%;
-  transition: @transicion;
+  padding: 0.8rem;
+  border: 1px solid @color-borde;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: @transicion-base;
 
   &:focus {
     border-color: @color-primario;
     outline: none;
-    .sombra(0.2);
+    .sombra(0.15);
   }
 }
 
-.boton(@color) {
-  background-color: @color;
+.boton(@colorFondo) {
+  background-color: @colorFondo;
   color: @color-blanco;
   border: none;
   border-radius: 8px;
   padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 600;
   cursor: pointer;
-  transition: @transicion;
+  font-weight: 600;
+  transition: @transicion-base;
 
   &:hover {
-    background-color: darken(@color, 8%);
-    transform: translateY(-2px);
+    background-color: darken(@colorFondo, 10%);
+    transform: scale(1.05);
   }
 }
 
 /****************************
  * ANIMACIONES
  ****************************/
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@keyframes fadeInScale {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
 }
 
 /****************************
@@ -65,40 +59,39 @@
  ****************************/
 body {
   margin: 0;
-  font-family: "Segoe UI", sans-serif;
-  background-color: @color-fondo;
+  font-family: 'Segoe UI', sans-serif;
+  background: @color-secundario;
   color: @color-texto;
 }
 
 /****************************
- * CONTENEDOR DE CONTACTO
+ * CONTENEDOR PRINCIPAL
  ****************************/
-.contacto-contenedor {
+.contacto {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 90vh;
+  height: 100vh;
   padding: 2rem;
-  background: linear-gradient(135deg, lighten(@color-primario, 20%), @color-primario);
+  background: linear-gradient(135deg, lighten(@color-primario, 10%), @color-primario);
 }
 
+/****************************
+ * FORMULARIO DE CONTACTO
+ ****************************/
 .formulario {
   background: @color-blanco;
-  padding: 2.5rem;
   border-radius: 1rem;
-  max-width: 500px;
+  padding: 2.5rem 3rem;
   width: 100%;
-  text-align: center;
-  .sombra(0.15);
+  max-width: 500px;
+  .sombra(0.2);
+  animation: fadeInScale 0.8s ease both;
 
   h1 {
+    text-align: center;
     color: @color-primario;
-    margin-bottom: 0.5rem;
-  }
-
-  p {
-    color: darken(@color-texto, 15%);
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
   }
 
   form {
@@ -106,41 +99,75 @@ body {
     flex-direction: column;
     gap: 1.2rem;
 
-    .campo {
-      text-align: left;
+    label {
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
 
-      label {
-        display: block;
-        font-weight: 600;
-        margin-bottom: 0.5rem;
-      }
+    input,
+    textarea {
+      .input-base();
+    }
 
-      input,
-      textarea {
-        .input-estilo();
-      }
+    textarea {
+      resize: vertical;
+      min-height: 120px;
     }
 
     .btn {
       .boton(@color-primario);
+      align-self: center;
+      width: 50%;
+      text-align: center;
     }
+  }
+
+  /* Efecto hover del formulario */
+  &:hover {
+    transform: translateY(-5px);
+    .sombra(0.3);
   }
 }
 
 /****************************
- * ANIMACIONES DE ENTRADA
+ * MEDIA QUERIES
  ****************************/
-.fade-in {
-  animation: fadeInUp 0.8s ease forwards;
+@media (max-width: 768px) {
+  .formulario {
+    padding: 2rem;
+    max-width: 400px;
+
+    h1 {
+      font-size: 1.6rem;
+    }
+
+    form {
+      .btn {
+        width: 100%;
+      }
+    }
+  }
 }
 
-/****************************
- * FOOTER
- ****************************/
-.footer {
-  background: @color-texto;
-  color: @color-blanco;
-  text-align: center;
-  padding: 1rem;
-  font-size: 0.9rem;
+@media (max-width: 480px) {
+  .formulario {
+    padding: 1.5rem;
+
+    h1 {
+      font-size: 1.4rem;
+    }
+
+    form {
+      gap: 1rem;
+
+      input,
+      textarea {
+        font-size: 0.9rem;
+      }
+
+      .btn {
+        font-size: 0.9rem;
+      }
+    }
+  }
 }

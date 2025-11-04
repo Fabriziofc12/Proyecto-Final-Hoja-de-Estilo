@@ -1,101 +1,66 @@
 <!DOCTYPE html>
-<html lang="es" xmlns="http://www.thymleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Header Responsive</title>
-    <link href="/css/output.css" rel="stylesheet" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartAcademy - Cursos</title>
+
+  <!-- Tailwind global -->
+  <link rel="stylesheet" href="/css/output.css" />
+  <!-- Estilos específicos de Cursos -->
+  <link rel="stylesheet" href="/css/cursos.css" />
 </head>
 
 <body>
+  <main>
+    <div th:replace="fragments/header :: header"></div>
 
-    <main>
-        <div th:replace="fragments/header :: header"></div>
-        <!-- Encabezado -->
-  <header class="bg-indigo-600 text-white py-6 shadow-lg">
-    <div class="max-w-6xl mx-auto px-6 text-center">
-      <h1 class="text-4xl font-bold">Nuestros Cursos</h1>
-      <p class="mt-2 text-indigo-200">Explora los cursos disponibles y mejora tus habilidades</p>
+    <!-- Contenedor exclusivo de la página de cursos -->
+    <div class="pagina-cursos">
+      <header>
+        <h1>Nuestros Cursos</h1>
+        <p>Explora los cursos disponibles y mejora tus habilidades</p>
+      </header>
+
+      <section>
+        <div class="grid-cursos">
+          <div class="tarjeta">
+            <img src="https://images.unsplash.com/photo-1584697964403-c8b9eaf5e85c" alt="Curso de Desarrollo Web" />
+            <div class="contenido">
+              <h2>Desarrollo Web</h2>
+              <p>Aprende HTML, CSS, JavaScript y frameworks modernos para crear sitios web profesionales.</p>
+              <button class="btn">Inscribirme</button>
+            </div>
+          </div>
+
+          <div class="tarjeta">
+            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c" alt="Curso de React" />
+            <div class="contenido">
+              <h2>React Avanzado</h2>
+              <p>Domina React, Hooks, Context y el ecosistema moderno para crear aplicaciones dinámicas.</p>
+              <button class="btn">Inscribirme</button>
+            </div>
+          </div>
+
+          <div class="tarjeta">
+            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692" alt="Curso de Python" />
+            <div class="contenido">
+              <h2>Python para Principiantes</h2>
+              <p>Aprende los fundamentos de la programación en Python y construye tus primeros proyectos.</p>
+              <button class="btn">Inscribirme</button>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
-  </header>
+  </main>
 
-  <!-- Sección de cursos -->
-  <main class="max-w-6xl mx-auto px-6 py-12">
-    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        <!-- Tarjeta 1 -->
-        <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow">
-            <img
-            src="https://images.unsplash.com/photo-1584697964403-c8b9eaf5e85c"
-            alt="Curso de Desarrollo Web"
-            class="w-full h-48 object-cover"
-            />
-            <div class="p-6">
-            <h2 class="text-xl font-bold mb-2 text-indigo-600">Desarrollo Web</h2>
-            <p class="text-gray-600 mb-4">
-                Aprende HTML, CSS, JavaScript y frameworks modernos para crear sitios web profesionales.
-            </p>
-            <button
-                class="w-full bg-indigo-600 text-white py-2 rounded-lg font-semibold hover:bg-indigo-700 transition"
-            >
-                Inscribirme
-            </button>
-            </div>
-        </div>
-
-        <!-- Tarjeta 2 -->
-        <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow">
-            <img
-            src="https://images.unsplash.com/photo-1519389950473-47ba0277781c"
-            alt="Curso de React"
-            class="w-full h-48 object-cover"
-            />
-            <div class="p-6">
-            <h2 class="text-xl font-bold mb-2 text-indigo-600">React Avanzado</h2>
-            <p class="text-gray-600 mb-4">
-                Domina React, Hooks, Context y el ecosistema moderno para crear aplicaciones dinámicas.
-            </p>
-            <button
-                class="w-full bg-indigo-600 text-white py-2 rounded-lg font-semibold hover:bg-indigo-700 transition"
-            >
-                Inscribirme
-            </button>
-            </div>
-        </div>
-
-        <!-- Tarjeta 3 -->
-        <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow">
-            <img
-            src="https://images.unsplash.com/photo-1551434678-e076c223a692"
-            alt="Curso de Python"
-            class="w-full h-48 object-cover"
-            />
-            <div class="p-6">
-            <h2 class="text-xl font-bold mb-2 text-indigo-600">Python para Principiantes</h2>
-            <p class="text-gray-600 mb-4">
-                Aprende los fundamentos de la programación en Python y construye tus primeros proyectos.
-            </p>
-            <button
-                class="w-full bg-indigo-600 text-white py-2 rounded-lg font-semibold hover:bg-indigo-700 transition"
-            >
-                Inscribirme
-            </button>
-            </div>
-        </div>
-
-        </div>
-    </main>
-
-    </main>
-    <script>
-        // Script para abrir/cerrar el menú móvil
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-    </script>
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+  </script>
 </body>
 
 </html>

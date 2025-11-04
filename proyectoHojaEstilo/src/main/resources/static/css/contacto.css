@@ -7,14 +7,14 @@
 /****************************
  * ANIMACIONES
  ****************************/
-@keyframes fadeInUp {
-  from {
+@keyframes fadeInScale {
+  0% {
     opacity: 0;
-    transform: translateY(40px);
+    transform: scale(0.9);
   }
-  to {
+  100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1);
   }
 }
 /****************************
@@ -22,94 +22,118 @@
  ****************************/
 body {
   margin: 0;
-  font-family: "Segoe UI", sans-serif;
-  background-color: #f9fafb;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f9fafb;
   color: #1f2937;
 }
 /****************************
- * CONTENEDOR DE CONTACTO
+ * CONTENEDOR PRINCIPAL
  ****************************/
-.contacto-contenedor {
+.contacto {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 90vh;
+  height: 100vh;
   padding: 2rem;
-  background: linear-gradient(135deg, #a49ff2, #4f46e5);
+  background: linear-gradient(135deg, #00e284, #00af66);
 }
+/****************************
+ * FORMULARIO DE CONTACTO
+ ****************************/
 .formulario {
   background: #ffffff;
-  padding: 2.5rem;
   border-radius: 1rem;
-  max-width: 500px;
+  padding: 2.5rem 3rem;
   width: 100%;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  max-width: 500px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  animation: fadeInScale 0.8s ease both;
+  /* Efecto hover del formulario */
 }
 .formulario h1 {
-  color: #4f46e5;
-  margin-bottom: 0.5rem;
-}
-.formulario p {
-  color: #030506;
-  margin-bottom: 2rem;
+  text-align: center;
+  color: #00af66;
+  margin-bottom: 1.5rem;
 }
 .formulario form {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
 }
-.formulario form .campo {
-  text-align: left;
-}
-.formulario form .campo label {
-  display: block;
+.formulario form label {
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
 }
-.formulario form .campo input,
-.formulario form .campo textarea {
-  border: 1px solid #93a7c2;
-  border-radius: 8px;
-  padding: 0.7rem;
-  font-size: 1rem;
+.formulario form input,
+.formulario form textarea {
   width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
   transition: all 0.3s ease;
 }
-.formulario form .campo input:focus,
-.formulario form .campo textarea:focus {
-  border-color: #4f46e5;
+.formulario form input:focus,
+.formulario form textarea:focus {
+  border-color: #00af66;
   outline: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.formulario form textarea {
+  resize: vertical;
+  min-height: 120px;
 }
 .formulario form .btn {
-  background-color: #4f46e5;
+  background-color: #00af66;
   color: #ffffff;
   border: none;
   border-radius: 8px;
   padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 600;
   cursor: pointer;
+  font-weight: 600;
   transition: all 0.3s ease;
+  align-self: center;
+  width: 50%;
+  text-align: center;
 }
 .formulario form .btn:hover {
-  background-color: #2d22e0;
-  transform: translateY(-2px);
+  background-color: #007c48;
+  transform: scale(1.05);
+}
+.formulario:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 /****************************
- * ANIMACIONES DE ENTRADA
+ * MEDIA QUERIES
  ****************************/
-.fade-in {
-  animation: fadeInUp 0.8s ease forwards;
+@media (max-width: 768px) {
+  .formulario {
+    padding: 2rem;
+    max-width: 400px;
+  }
+  .formulario h1 {
+    font-size: 1.6rem;
+  }
+  .formulario form .btn {
+    width: 100%;
+  }
 }
-/****************************
- * FOOTER
- ****************************/
-.footer {
-  background: #1f2937;
-  color: #ffffff;
-  text-align: center;
-  padding: 1rem;
-  font-size: 0.9rem;
+@media (max-width: 480px) {
+  .formulario {
+    padding: 1.5rem;
+  }
+  .formulario h1 {
+    font-size: 1.4rem;
+  }
+  .formulario form {
+    gap: 1rem;
+  }
+  .formulario form input,
+  .formulario form textarea {
+    font-size: 0.9rem;
+  }
+  .formulario form .btn {
+    font-size: 0.9rem;
+  }
 }
