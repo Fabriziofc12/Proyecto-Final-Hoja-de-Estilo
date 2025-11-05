@@ -1,10 +1,11 @@
 package com.proyecto.hoja.estilo.proyectoHojaEstilo.model;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,14 +16,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class EventoParticipante {
+public class Alumno {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private Alumno alumno;
+    private String nombreCompleto;
+    private String nacionalidad;
+    private String correoElectronico;
+    private String contrasena;
 
-    @ManyToOne
-    private Evento evento;
+    private String tipoAcceso; // gratuito, plan mensual, plan anual
+    private String imagenPerfil;
+    private LocalDate fechaNacimiento;
 }
+

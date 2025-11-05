@@ -28,10 +28,10 @@
                         class="text-white py-2 px-3 rounded-sm hover:bg-emerald-600 transition duration-500">Eventos</a>
                     <a th:href="@{Contacto}"
                         class="text-white py-2 px-3 rounded-sm hover:bg-emerald-600 transition duration-500">Contacto</a>
-                    <button onclick="openLoginModal()"
+                    <a th:href="@{/login}"><button 
                         class="py-2 px-3 rounded-sm bg-emerald-600 text-white hover:scale-110 transition duration-500">
                         Iniciar Sesión
-                    </button>
+                    </button></a>
 
                 </div>
             </div>
@@ -45,14 +45,13 @@
                 class="block text-white py-2 px-3 rounded-sm hover:bg-emerald-600 transition duration-500">Instructores</a>
             <a th:href="@{Contacto}"
                 class="block text-white py-2 px-3 rounded-sm hover:bg-emerald-600 transition duration-500">Contacto</a>
-            <button onclick="openLoginModal()"
+            <a th:href="@{/login}"><button 
                 class="py-2 px-3 rounded-sm bg-emerald-600 text-white hover:scale-110 transition duration-500">
                 Iniciar Sesión
-            </button>
+            </button></a>
 
         </div>
     </header>
-    <div th:replace="fragments/login-modal :: login-modal"></div>
 
 
     <script>

@@ -1,37 +1,33 @@
 package com.proyecto.hoja.estilo.proyectoHojaEstilo.model;
 
+import java.time.LocalDate;
 
-import jakarta.persistence.*;
-import java.time.LocalDateTime;
-
-import lombok.*;
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "inscripciones")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Inscripcion {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime fechaInscripcion = LocalDateTime.now();
+    @ManyToOne
+    private Alumno alumno;
 
-    private boolean activo = true; // indica si el alumno sigue inscrito
-
-    private Double calificacion; // opcional, si deseas guardar nota final
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id", nullable = false)
-    @ToString.Exclude
-    private Usuario usuario;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "curso_id", nullable = false)
-    @ToString.Exclude
+    @ManyToOne
     private Curso curso;
+
+    private LocalDate fechaInscripcion;
 }
+

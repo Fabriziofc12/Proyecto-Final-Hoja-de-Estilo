@@ -1,5 +1,6 @@
 package com.proyecto.hoja.estilo.proyectoHojaEstilo.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,14 +16,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class EventoParticipante {
+public class ClaseCurso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private Alumno alumno;
+    private String titulo;
+    private String videoUrl;
+    
+    @Column(length = 2000)
+    private String resumenTexto;
+
+    private int orden; // para indicar cuál clase va primero
 
     @ManyToOne
-    private Evento evento;
+    private Curso curso;
 }
+

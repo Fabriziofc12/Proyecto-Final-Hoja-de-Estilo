@@ -29,4 +29,8 @@ public class HomeController {
     public String getEventos() {
         return "Eventos";
     } 
+    @GetMapping("/registro")
+    public String getRegistro() {
+        return "registro";
+    } 
 }

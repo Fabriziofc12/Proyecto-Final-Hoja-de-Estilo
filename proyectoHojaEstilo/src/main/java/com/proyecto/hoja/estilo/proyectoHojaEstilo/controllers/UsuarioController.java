@@ -6,12 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 import java.util.*;
 
 @Controller
 public class UsuarioController {
 
-    @GetMapping("/Usuario")
+    @GetMapping("/usuario")
     public String mostrarPerfil(Model model) {
 
         // Datos de usuario simulados (puedes luego obtenerlos desde la BD)
@@ -58,7 +59,7 @@ public class UsuarioController {
         return "usuario"; // Thymeleaf buscará usuario.html en /templates
     }
 
-    @PostMapping("/Usuario/Actualizar")
+    @PostMapping("/usuario/Actualizar")
     public String actualizarPerfil(
             @RequestParam("nombre") String nombre,
             @RequestParam("correo") String correo,
@@ -84,4 +85,19 @@ public class UsuarioController {
 
         return "usuario";
     }
+    
+        @GetMapping("/login")
+        public String mostrarLogin() {
+        return "login";
+        }
+
+        @PostMapping("/login")
+        public String procesarLogin() {
+        // Aquí más adelante validarás usuario y contraseña
+        return "redirect:/usuario"; // o donde quieras redirigir tras iniciar sesión
+        }
+
+    
+
+
 }

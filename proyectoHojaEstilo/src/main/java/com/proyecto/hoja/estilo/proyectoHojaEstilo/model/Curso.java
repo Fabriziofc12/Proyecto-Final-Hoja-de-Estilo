@@ -1,42 +1,34 @@
 package com.proyecto.hoja.estilo.proyectoHojaEstilo.model;
 
-import jakarta.persistence.*;
+import java.time.LocalDate;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
-import lombok.*;
-
-
-
 @Entity
-@Table(name = "cursos")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Curso {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String titulo;
+    private String nombre;
     private String descripcion;
-    private String imagen;
-
-    private double precio;
+    private String nivel;
+    private String imagenRepresentativa;
+    private LocalDate fechaPublicacion;
+    private int numeroDeClases;
 
     @ManyToOne
-    @JoinColumn(name = "instructor_id")
-    private Instructor instructor;
-
-    // Un curso puede tener varios alumnos inscritos
-    @ManyToMany(mappedBy = "cursos")
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private List<Usuario> alumnos;
+    private Profesor profesorAsignado;
 }
