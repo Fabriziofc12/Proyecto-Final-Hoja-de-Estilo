@@ -19,18 +19,24 @@
       <!-- Texto superpuesto -->
       <div class="absolute inset-0 bg-gradient-to-t from-gray-900/70 to-transparent flex flex-col justify-end p-8">
         <h1 class="text-4xl font-extrabold text-white mb-2" th:text="${curso.titulo}">Título del Curso</h1>
-        <p class="text-gray-200 text-lg" th:text="${curso.descripcion}">
-          Descripción general del curso.
-        </p>
       </div>
-    </section>
 
+    </section>
+    
     <!-- Botones principales -->
     <div class="flex justify-between items-center mb-12">
-      <a th:href="@{/Cursos}"
-         class="bg-gray-200 text-gray-800 px-5 py-2 rounded-lg hover:bg-gray-300 transition font-medium">
-        ← Volver
-      </a>
+      <div>
+        <p class="text-black text-lg" >
+          Fecha de publicacion
+        </p>
+        <p><a href="" class="border-b-black border">Nivel del curso</a> <a href=""  class="border-b-black border">numero de clases dentro del curso</a></p>
+        <p class="text-black text-lg" >
+          Descripción general del curso.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde voluptates, cumque culpa iure nobis quas ea aliquid, quibusdam ex magnam praesentium, perferendis deserunt molestiae illo odio nesciunt voluptatum sapiente exercitationem!
+        </p>
+        <p>Precio del curso por individual S/100</p>
+        <a th:href="@{/Planes}" class="bg-emerald-600 text-white px-6 py-2 rounded-lg">Adquirir un plan</a>
+      </div>  
       <button
         class="bg-emerald-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-emerald-700 transition">
         Inscribirme
