@@ -32,10 +32,25 @@
   font-family: "Inter", sans-serif;
 
   .hero {
-    text-align: center;
-    padding: 4rem 1rem;
-    background: linear-gradient(135deg, @primary, @secondary);
-    color: white;
+  padding: 4rem 2rem;
+  background: linear-gradient(90deg, @primary, @secondary) !important;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 250px;
+
+  .hero-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    flex-wrap: wrap;
+  }
+
+  .hero-text {
+    flex: 1 1 45%;
 
     h1 {
       font-size: 2.5rem;
@@ -48,6 +63,43 @@
       opacity: 0.9;
     }
   }
+
+  .hero-search {
+    flex: 1 1 45%;
+    text-align: right;
+
+    form {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+
+      input {
+        padding: 10px 15px;
+        border-radius: 8px;
+        border: 2px solid white;
+        width: 250px;
+        font-size: 1rem;
+        outline: none;
+      }
+
+      button {
+        background: white;
+        color: @primary;
+        font-weight: 600;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: lighten(@primary, 20%);
+        }
+      }
+    }
+  }
+}
+
 
   .cursos-grid {
     display: grid;

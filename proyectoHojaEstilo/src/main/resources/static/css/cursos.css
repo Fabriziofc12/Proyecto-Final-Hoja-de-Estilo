@@ -4,19 +4,63 @@
   font-family: "Inter", sans-serif;
 }
 .cursos-page .hero {
-  text-align: center;
-  padding: 4rem 1rem;
-  background: linear-gradient(135deg, #059669, #10b981);
+  padding: 4rem 2rem;
+  background: linear-gradient(90deg, #059669, #10b981) !important;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 250px;
 }
-.cursos-page .hero h1 {
+.cursos-page .hero .hero-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  max-width: 1200px;
+  flex-wrap: wrap;
+}
+.cursos-page .hero .hero-text {
+  flex: 1 1 45%;
+}
+.cursos-page .hero .hero-text h1 {
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
 }
-.cursos-page .hero p {
+.cursos-page .hero .hero-text p {
   font-size: 1.1rem;
   opacity: 0.9;
+}
+.cursos-page .hero .hero-search {
+  flex: 1 1 45%;
+  text-align: right;
+}
+.cursos-page .hero .hero-search form {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.cursos-page .hero .hero-search form input {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 2px solid white;
+  width: 250px;
+  font-size: 1rem;
+  outline: none;
+}
+.cursos-page .hero .hero-search form button {
+  background: white;
+  color: #059669;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.cursos-page .hero .hero-search form button:hover {
+  background: #0af7ad;
 }
 .cursos-page .cursos-grid {
   display: grid;
