@@ -1,30 +1,31 @@
 package com.proyecto.hoja.estilo.proyectoHojaEstilo.model;
 
+import jakarta.persistence.*;
+import lombok.*;
 import java.time.LocalDateTime;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "eventos")
 public class Evento {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nombre;
-    private String tipoEvento; // taller, seminario, conferencia, etc.
+    private String tipo;
     private String descripcion;
     private String imagen;
-    private LocalDateTime horario;
+    private LocalDateTime fechaHora;
+    private String enlace;
+
+    @OneToMany(mappedBy = "evento", cascade = CascadeType.ALL)
+    private List<EventoParticipante> participantes;
 }
+
 

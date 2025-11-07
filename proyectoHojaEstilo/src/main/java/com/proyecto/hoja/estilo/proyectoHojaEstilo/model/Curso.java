@@ -1,34 +1,37 @@
 package com.proyecto.hoja.estilo.proyectoHojaEstilo.model;
 
+import jakarta.persistence.*;
+import lombok.*;
 import java.time.LocalDate;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "cursos")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Curso {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nombre;
+    private String titulo;
+
     private String descripcion;
+
     private String nivel;
-    private String imagenRepresentativa;
+
+    private String imagen;
+
     private LocalDate fechaPublicacion;
-    private int numeroDeClases;
+
+    private int numeroClases;
 
     @ManyToOne
-    private Profesor profesorAsignado;
+    @JoinColumn(name = "profesor_id")
+    private Profesor profesor; // Asociación con el profesor
 }
+
+

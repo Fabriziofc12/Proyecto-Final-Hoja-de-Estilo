@@ -1,29 +1,31 @@
 package com.proyecto.hoja.estilo.proyectoHojaEstilo.model;
 
+
 import jakarta.persistence.*;
 import lombok.*;
-import java.time.LocalDate;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "inscripciones")
-public class Inscripcion {
+@Table(name = "clases")
+public class Clase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "alumno_id")
-    private Usuario alumno;
+    private String titulo;
+    private String videoUrl;
+
+    @Column(length = 1000)
+    private String resumen;
+
+    private int orden; // número de clase dentro del curso
 
     @ManyToOne
     @JoinColumn(name = "curso_id")
     private Curso curso;
-
-    private LocalDate fechaInscripcion;
 }
 
