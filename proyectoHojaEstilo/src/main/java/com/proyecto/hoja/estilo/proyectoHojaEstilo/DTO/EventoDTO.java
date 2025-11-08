@@ -6,10 +6,11 @@ import lombok.Data;
 @Data
 public class EventoDTO {
     private Long id;
-    private String nombreEvento;
-    private String tipoEvento;
+    private String nombre;
     private String descripcion;
+    private String tipo;
     private String imagen;
-    private String horario;
+    private java.time.LocalDateTime horario;
 }
+
 

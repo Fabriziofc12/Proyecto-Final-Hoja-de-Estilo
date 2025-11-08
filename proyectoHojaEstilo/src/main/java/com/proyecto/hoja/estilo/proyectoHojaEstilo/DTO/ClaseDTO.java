@@ -6,8 +6,10 @@ import lombok.Data;
 public class ClaseDTO {
     private Long id;
     private String titulo;
-    private String videoUrl;
     private String resumen;
-    private int orden; // posición dentro del curso
+    private String videoUrl;
+    private Integer orden;
+    private Long cursoId;
 }
+
 

@@ -4,12 +4,11 @@ package com.proyecto.hoja.estilo.proyectoHojaEstilo.DTO;
 import lombok.Data;
 
 @Data
-public class ProfesorDTO {
+public class UsuarioDTO {
     private Long id;
     private String nombreCompleto;
-    private String especialidad;
+    private String correoElectronico;
+    private String tipoAcceso; // Ej: ADMIN, ALUMNO
     private String nacionalidad;
-    private String descripcion;
     private String imagenPerfil;
-    private String correoInstitucional;
 }
