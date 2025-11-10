@@ -32,6 +32,11 @@ public class Pago {
     private String metodoPago; // tarjeta, paypal, etc.
     
     private LocalDateTime fechaPago;
+    
+    @Column(unique = true, nullable = false)
+    private String referencia; // ID único del pago, generado o asignado
+
     private String descripcion; // "Plan mensual", "Curso X"
+    
 }
 

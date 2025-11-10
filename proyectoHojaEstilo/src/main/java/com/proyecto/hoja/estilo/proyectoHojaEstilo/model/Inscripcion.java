@@ -2,7 +2,7 @@ package com.proyecto.hoja.estilo.proyectoHojaEstilo.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -24,6 +24,8 @@ public class Inscripcion {
     @JoinColumn(name = "curso_id")
     private Curso curso;
 
-    private LocalDate fechaInscripcion;
+    private EstadoInscripcion estado; 
+
+    private LocalDateTime fechaInscripcion;
 }
 

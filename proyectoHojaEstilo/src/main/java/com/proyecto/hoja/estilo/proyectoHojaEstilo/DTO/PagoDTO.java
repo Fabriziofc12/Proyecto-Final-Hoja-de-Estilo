@@ -12,6 +12,7 @@ public class PagoDTO {
     private String estado;
     private LocalDateTime fechaPago;
     private Long usuarioId;
+    private String referencia;
 }
 
 

@@ -1,4 +1,4 @@
-package com.proyecto.hoja.estilo.proyectoHojaEstilo.Repository;
+package com.proyecto.hoja.estilo.proyectoHojaEstilo.repository;
 
 import com.proyecto.hoja.estilo.proyectoHojaEstilo.model.Evento;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -20,12 +20,15 @@ public class Clase {
     private String videoUrl;
 
     @Column(length = 1000)
-    private String resumen;
+    private String descripcion;
 
     private int orden; // número de clase dentro del curso
 
     @ManyToOne
     @JoinColumn(name = "curso_id")
     private Curso curso;
+
+    @Column(nullable = false)
+    private Integer numeroClase;
 }
 
