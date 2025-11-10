@@ -8,7 +8,7 @@ import jakarta.validation.constraints.*;
 public class LoginDTO {
 
     @Email(message = "Debe ingresar un correo válido")
-    private String correoElectronico;
+    private String correo;
 
     @NotBlank(message = "Debe ingresar su contraseña")
     private String password;
