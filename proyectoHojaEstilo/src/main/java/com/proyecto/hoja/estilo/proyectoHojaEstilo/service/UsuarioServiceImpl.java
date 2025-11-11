@@ -1,9 +1,12 @@
 package com.proyecto.hoja.estilo.proyectoHojaEstilo.service;
 
+import com.proyecto.hoja.estilo.proyectoHojaEstilo.DTO.RegistroDTO;
+import com.proyecto.hoja.estilo.proyectoHojaEstilo.model.Rol;
 import com.proyecto.hoja.estilo.proyectoHojaEstilo.model.Usuario;
 import com.proyecto.hoja.estilo.proyectoHojaEstilo.repository.UsuarioRepository;
 import com.proyecto.hoja.estilo.proyectoHojaEstilo.service.interfaces.UsuarioService;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,9 +15,11 @@ import java.util.Optional;
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
  private final UsuarioRepository usuarioRepository;
+ private final PasswordEncoder passwordEncoder;
 
-    public UsuarioServiceImpl(UsuarioRepository usuarioRepository) {
+    public UsuarioServiceImpl(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
         this.usuarioRepository = usuarioRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -33,7 +38,18 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public Usuario registrarUsuario(Usuario usuario) {
+    public Usuario registrarNuevoUsuario(RegistroDTO dto) {
+        if (usuarioRepository.findByCorreo(dto.getCorreo()).isPresent()) {
+            throw new IllegalArgumentException("Ya existe un usuario con este correo.");
+        }
+
+        Usuario usuario = new Usuario();
+        usuario.setNombre(dto.getNombre());
+        usuario.setApellido(dto.getApellido());
+        usuario.setCorreo(dto.getCorreo());
+        usuario.setContrasena(passwordEncoder.encode(dto.getPassword()));
+        usuario.setRol(Rol.ALUMNO);
+
         return usuarioRepository.save(usuario);
     }
 
@@ -60,4 +76,6 @@ public class UsuarioServiceImpl implements UsuarioService {
                 .filter(u -> u.getContrasena().equals(password))
                 .orElse(null);
     }
+
+    
 }

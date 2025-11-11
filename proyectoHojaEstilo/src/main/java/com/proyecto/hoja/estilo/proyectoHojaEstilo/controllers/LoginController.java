@@ -33,8 +33,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String procesarLogin(@Valid @ModelAttribute("loginDTO") LoginDTO dto,
-                                BindingResult result, HttpSession session, Model model) {
+    public String procesarLogin(@Valid @ModelAttribute("loginDTO") LoginDTO dto, BindingResult result, HttpSession session, Model model) {
 
         if (result.hasErrors()) return "login";
 

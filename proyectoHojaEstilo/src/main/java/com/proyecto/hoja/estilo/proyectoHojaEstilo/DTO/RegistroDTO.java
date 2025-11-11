@@ -4,7 +4,7 @@ import lombok.Data;
 import jakarta.validation.constraints.*;
 
 @Data
-public class RegistroUsuarioDTO {
+public class RegistroDTO {
 
     @NotBlank(message = "El nombre no puede estar vacío")
     private String nombre;
