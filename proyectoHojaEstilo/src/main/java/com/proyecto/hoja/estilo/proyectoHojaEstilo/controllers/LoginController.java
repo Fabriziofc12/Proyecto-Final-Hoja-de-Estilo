@@ -34,33 +34,31 @@ public class LoginController {
     }
 
     @PostMapping
-public String procesarLogin(@Valid @ModelAttribute("loginDTO") LoginDTO dto,
-                            BindingResult result,
-                            Model model) {
+    public String procesarLogin(@Valid @ModelAttribute("loginDTO") LoginDTO dto,BindingResult result, Model model) {
 
-    if (result.hasErrors()) {
-        return "login";
+        if (result.hasErrors()) {
+            return "login";
+        }
+
+        // Buscar usuario por correo
+        Optional<Usuario> optionalUsuario = usuarioService.obtenerPorCorreo(dto.getCorreo());
+
+        if (optionalUsuario.isEmpty()) {
+            model.addAttribute("error", "Correo o contraseña incorrectos");
+            return "login";
+        }
+
+        Usuario usuario = optionalUsuario.get();
+
+        // Validar contraseña (sin seguridad aún, comparación simple)
+        if (!usuario.getContrasena().equals(dto.getPassword())) {
+            model.addAttribute("error", "Correo o contraseña incorrectos");
+            return "login";
+        }
+
+        // Si todo está correcto, redirigir al panel de usuario
+        model.addAttribute("usuario", modelMapper.map(usuario, UsuarioDTO.class));
+        return "redirect:/usuario";
     }
-
-    // Buscar usuario por correo
-    Optional<Usuario> optionalUsuario = usuarioService.obtenerPorCorreo(dto.getCorreo());
-
-    if (optionalUsuario.isEmpty()) {
-        model.addAttribute("error", "Correo o contraseña incorrectos");
-        return "login";
-    }
-
-    Usuario usuario = optionalUsuario.get();
-
-    // Validar contraseña (sin seguridad aún, comparación simple)
-    if (!usuario.getContrasena().equals(dto.getPassword())) {
-        model.addAttribute("error", "Correo o contraseña incorrectos");
-        return "login";
-    }
-
-    // Si todo está correcto, redirigir al panel de usuario
-    model.addAttribute("usuario", modelMapper.map(usuario, UsuarioDTO.class));
-    return "redirect:/usuario";
-}
 
 }
