@@ -1,68 +1,133 @@
 <div th:fragment="header">
-    <header class="bg-gray-800 shadow-md relative">
-        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center">
-                    <a th:href="@{/Index}">
-                        <span class="ml-2 text-xl font-extrabold text-white">SMART ACADEMY</span>
-                    </a>
-                </div>
-
-                <!-- Botón hamburguesa (solo móvil) -->
-                <div class="md:hidden">
-                    <button id="menu-btn" class="text-white hover:text-emerald-400 focus:outline-none">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
-
-                <!-- Menú de navegación -->
-                <div id="menu" class="hidden md:flex space-x-6">
-                    <a th:href="@{Cursos}"
-                        class="text-white py-2 px-3 rounded-sm hover:bg-emerald-600 transition duration-500">Cursos</a>
-                    <a th:href="@{Instructores}"
-                        class="text-white py-2 px-3 rounded-sm hover:bg-emerald-600 transition duration-500">Instructores</a>
-                    <a th:href="@{Eventos}"
-                        class="text-white py-2 px-3 rounded-sm hover:bg-emerald-600 transition duration-500">Eventos</a>
-                    <a th:href="@{Contacto}"
-                        class="text-white py-2 px-3 rounded-sm hover:bg-emerald-600 transition duration-500">Contacto</a>
-                    <a th:href="@{/planes}"
-                        class="text-white py-2 px-3 rounded-sm hover:bg-emerald-600 transition duration-500">Planes</a>
-                    <a th:href="@{/login}"><button 
-                        class="py-2 px-3 rounded-sm bg-emerald-600 text-white hover:scale-110 transition duration-500">
-                        Iniciar Sesión
-                    </button></a>
-
-                </div>
-            </div>
-        </nav>
-
-        <!-- Menú móvil -->
-        <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2">
-            <a th:href="@{Cursos}"
-                class="block text-white py-2 px-3 rounded-sm hover:bg-emerald-600 transition duration-500">Cursos</a>
-            <a th:href="@{Instructores}"
-                class="block text-white py-2 px-3 rounded-sm hover:bg-emerald-600 transition duration-500">Instructores</a>
-            <a th:href="@{Contacto}"
-                class="block text-white py-2 px-3 rounded-sm hover:bg-emerald-600 transition duration-500">Contacto</a>
-            <a th:href="@{/login}"><button 
-                class="py-2 px-3 rounded-sm bg-emerald-600 text-white hover:scale-110 transition duration-500">
-                Iniciar Sesión
-            </button></a>
-
+  <header class="bg-gray-800 shadow-md relative">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center">
+          <a th:href="@{/Index}">
+            <span class="ml-2 text-xl font-extrabold text-white">SMART ACADEMY</span>
+          </a>
         </div>
-    </header>
 
+        <!-- Botón hamburguesa (solo móvil) -->
+        <div class="md:hidden">
+          <button id="menu-btn" class="text-white hover:text-emerald-400 focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
 
-    <script>
-        // Menú móvil
-        const menuBtn = document.getElementById("menu-btn");
-        const mobileMenu = document.getElementById("mobile-menu");
+        <!-- Menú de navegación (Desktop) -->
+        <div id="menu" class="hidden md:flex space-x-6">
+          <a th:href="@{/Cursos}" class="text-white py-2 px-3 rounded-sm hover:bg-emerald-600 transition">Cursos</a>
+          <a th:href="@{/Instructores}" class="text-white py-2 px-3 rounded-sm hover:bg-emerald-600 transition">Instructores</a>
+          <a th:href="@{/Eventos}" class="text-white py-2 px-3 rounded-sm hover:bg-emerald-600 transition">Eventos</a>
+          <a th:href="@{/Contacto}" class="text-white py-2 px-3 rounded-sm hover:bg-emerald-600 transition">Contacto</a>
+          <a th:href="@{/planes}" class="text-white py-2 px-3 rounded-sm hover:bg-emerald-600 transition">Planes</a>
+
+          <!-- Si NO hay usuario logueado -->
+          <div th:if="${session.usuarioLogueado == null}">
+            <a th:href="@{/login}">
+              <button class="py-2 px-3 rounded-sm bg-emerald-600 text-white hover:scale-110 transition">
+                Iniciar Sesión
+              </button>
+            </a>
+          </div>
+
+          <!-- Si hay usuario logueado -->
+          <div th:if="${session.usuarioLogueado != null}" class="relative">
+            <button id="userMenuBtnDesktop"
+                    class="py-2 px-3 rounded-sm bg-emerald-600 text-white hover:bg-emerald-700 transition">
+              <span th:text="${session.usuarioLogueado.correo}">usuario@correo.com</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="inline ml-1 w-4 h-4" fill="none" viewBox="0 0 24 24"
+                   stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+
+            <!-- Menú desplegable desktop -->
+            <div id="userMenuDesktop"
+                 class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg hidden">
+              <a th:href="@{/usuario}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Perfil</a>
+              <a th:href="@{/logout}" class="block px-4 py-2 text-red-600 hover:bg-red-100">Cerrar sesión</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Menú móvil -->
+    <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2">
+      <a th:href="@{/Cursos}" class="block text-white py-2 px-3 rounded-sm hover:bg-emerald-600 transition">Cursos</a>
+      <a th:href="@{/Instructores}" class="block text-white py-2 px-3 rounded-sm hover:bg-emerald-600 transition">Instructores</a>
+      <a th:href="@{/Contacto}" class="block text-white py-2 px-3 rounded-sm hover:bg-emerald-600 transition">Contacto</a>
+
+      <!-- Si NO hay usuario logueado -->
+      <div th:if="${session.usuarioLogueado == null}">
+        <a th:href="@{/login}">
+          <button class="py-2 px-3 rounded-sm bg-emerald-600 text-white hover:scale-110 transition">
+            Iniciar Sesión
+          </button>
+        </a>
+      </div>
+
+      <!-- Si hay usuario logueado -->
+      <div th:if="${session.usuarioLogueado != null}" class="relative">
+        <button id="userMenuBtnMobile"
+                class="py-2 px-3 rounded-sm bg-emerald-600 text-white hover:bg-emerald-700 transition">
+          <span th:text="${session.usuarioLogueado.correo}"></span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="inline ml-1 w-4 h-4" fill="none" viewBox="0 0 24 24"
+               stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+
+        <!-- Menú desplegable móvil -->
+        <div id="userMenuMobile"
+             class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg hidden">
+          <a th:href="@{/usuario}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Perfil</a>
+          <a th:href="@{/logout}" class="block px-4 py-2 text-red-600 hover:bg-red-100">Cerrar sesión</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // ✅ Toggle menú móvil
+      const menuBtn = document.getElementById("menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+      if (menuBtn && mobileMenu) {
         menuBtn.addEventListener("click", () => {
-            mobileMenu.classList.toggle("hidden");
+          mobileMenu.classList.toggle("hidden");
         });
+      }
 
-    </script>
+      // ✅ Dropdown Desktop
+      const btnDesktop = document.getElementById('userMenuBtnDesktop');
+      const menuDesktop = document.getElementById('userMenuDesktop');
+      if (btnDesktop && menuDesktop) {
+        btnDesktop.addEventListener('click', (e) => {
+          e.stopPropagation();
+          menuDesktop.classList.toggle('hidden');
+        });
+        document.addEventListener('click', (e) => {
+          if (!btnDesktop.contains(e.target)) menuDesktop.classList.add('hidden');
+        });
+      }
+
+      // ✅ Dropdown Móvil
+      const btnMobile = document.getElementById('userMenuBtnMobile');
+      const menuMobile = document.getElementById('userMenuMobile');
+      if (btnMobile && menuMobile) {
+        btnMobile.addEventListener('click', (e) => {
+          e.stopPropagation();
+          menuMobile.classList.toggle('hidden');
+        });
+        document.addEventListener('click', (e) => {
+          if (!btnMobile.contains(e.target)) menuMobile.classList.add('hidden');
+        });
+      }
+    });
+  </script>
 </div>

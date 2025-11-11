@@ -1,6 +1,5 @@
 package com.proyecto.hoja.estilo.proyectoHojaEstilo.model;
 
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

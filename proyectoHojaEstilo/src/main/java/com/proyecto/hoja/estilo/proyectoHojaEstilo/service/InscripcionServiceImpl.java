@@ -63,8 +63,8 @@ public class InscripcionServiceImpl implements InscripcionService {
     }
 
     @Override
-    public List<Inscripcion> listarPorUsuario(Long usuarioId) {
-        return inscripcionRepository.findByUsuarioId(usuarioId);
+    public List<Inscripcion> listarPorUsuario(Long alumno) {
+        return inscripcionRepository.findByAlumno_id(alumno);
     }
 
     @Override

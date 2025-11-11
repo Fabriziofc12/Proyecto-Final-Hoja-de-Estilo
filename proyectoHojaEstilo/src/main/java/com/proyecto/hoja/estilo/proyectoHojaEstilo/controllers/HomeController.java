@@ -5,18 +5,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.proyecto.hoja.estilo.proyectoHojaEstilo.DTO.UsuarioDTO;
+
+import jakarta.servlet.http.HttpSession;
+
 
 
 
 @Controller
 public class HomeController {
-    @GetMapping("/Index")
-    public String getIndex(Model model) {
-            model.addAttribute("titulo", "Página de Inicio");
-            model.addAttribute("header", "Logo");
-            model.addAttribute("contenido", "Landing Page");
-        return "Index";
-    }
+    
     @GetMapping("/Contacto")
     public String getContacto() {
         return "Contacto";
@@ -33,4 +31,10 @@ public class HomeController {
     public String getRegistro() {
         return "registro";
     } 
+    @GetMapping("/Cursos")
+    public String getCursos() {
+        return "Cursos";
+    }
+    
+
 }

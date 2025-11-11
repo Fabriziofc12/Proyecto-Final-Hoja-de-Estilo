@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -26,7 +28,7 @@ public class Pago {
     @NotNull(message = "El total no puede ser nulo.")
     @DecimalMin(value = "0.01", message = "El total debe ser mayor que 0.")
     @Column(nullable = false, precision = 12, scale = 2)
-    private double monto;
+    private BigDecimal monto;
 
     @NotNull(message = "Debe seleccionarse un método de pago.")
     private String metodoPago; // tarjeta, paypal, etc.
