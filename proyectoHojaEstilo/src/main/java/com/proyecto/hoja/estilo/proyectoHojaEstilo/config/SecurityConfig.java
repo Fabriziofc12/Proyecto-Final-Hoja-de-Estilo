@@ -40,7 +40,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/Index","/planes", "/login","/Cursos","/Instructores","/Eventos", "/Contacto", "/registro", "/css/**", "/js/**", "/images/**").permitAll() // rutas públicas
+                .requestMatchers("/", "/Index","/planes", "/login","/Cursos","/Instructores","/Eventos", "/Contacto", "/registro", "/css/**", "/js/**", "/images/**").permitAll()
+
+                // 🔒 Solo ADMIN puede entrar a rutas del panel admin
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+
+                .requestMatchers("/user/**").hasRole("ALUMNO")
+
                 .anyRequest().authenticated() // las demás requieren login
             )
             .formLogin(form -> form
@@ -52,7 +58,10 @@ public class SecurityConfig {
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login?logout=true")
                 .permitAll()
+            ).exceptionHandling(ex -> ex
+                .accessDeniedPage("/error/403")
             );
+
 
         return http.build();
     }
