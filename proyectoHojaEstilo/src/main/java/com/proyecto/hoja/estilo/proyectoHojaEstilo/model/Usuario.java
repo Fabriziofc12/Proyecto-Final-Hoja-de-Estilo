@@ -40,12 +40,13 @@ public class Usuario {
     @Column(name = "password_hash", nullable = false, length = 255)
     private String contrasena;
 
-    @NotBlank(message = "La URL de la imagen no puede estar vacía.")
+    
     @Size(max = 255, message = "La URL de la imagen no debe superar los 255 caracteres.")
-    @Column(nullable = false, length = 255, name = "image_url")
-    private String imagenPerfil;
+    @Column(length = 255, name = "image_url")
+    private String imagenPerfil = "default.png";
 
-    private boolean activo = true;
+    @Column(nullable = false)
+    private boolean activo = false;
 
     @Builder.Default
     @Enumerated(EnumType.STRING)
