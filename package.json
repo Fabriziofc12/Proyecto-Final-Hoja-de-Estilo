@@ -1,0 +1,25 @@
+{
+  "name": "proyecto-final-hoja-de-estilo",
+  "version": "1.0.0",
+  "description": "Proyecto final universitario - UTP, Desarrollo de una academia educativa\r Link de la documentacion del proyecto\r https://utpedupe-my.sharepoint.com/:w:/g/personal/u23250409_utp_edu_pe/Ebn6SDv19c5CgklkkN7JDJIBADLc9AhT5gBxvZcUCnSDbA?e=sT5qqm",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:styles": "tailwindcss -i ./CSS/input.css -o ./CSS/output.css --watch"
+  }, 
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fabriziofc12/Proyecto-Final-Hoja-de-Estilo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fabriziofc12/Proyecto-Final-Hoja-de-Estilo/issues"
+  },
+  "homepage": "https://github.com/Fabriziofc12/Proyecto-Final-Hoja-de-Estilo#readme",
+  "keywords": [],
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.17",
+    "tailwindcss": "^4.1.17"
+  }
+}

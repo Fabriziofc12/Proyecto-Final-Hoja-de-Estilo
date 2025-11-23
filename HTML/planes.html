@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planes - SmartAcademy</title>
+  <link rel="stylesheet" href="/CSS/output.css">
+</head>
+
+<body class="bg-gray-900 text-white">
+    <div th:replace="fragments/header :: header"></div>
+  <main class="min-h-screen flex flex-col items-center py-16 px-4">
+    <!-- Título -->
+    <h1 class="text-4xl font-bold mb-8 text-center">Elige el plan ideal para ti</h1>
+
+
+    <!-- Contenedor de planes -->
+    <div id="planes-personas" class="grid gap-8 sm:grid-cols-2 lg:grid-cols-2 max-w-6xl w-full">
+      <!-- Plan Basic -->
+      <div class="bg-gray-800 rounded-2xl p-8 border border-gray-700 flex flex-col justify-between">
+        <div>
+          <h2 class="text-2xl font-bold mb-2">Plan Basic</h2>
+          <p class="text-gray-400 mb-4">Para 1 estudiante</p>
+          <p class="text-3xl font-bold text-white mb-1">S/149<span class="text-lg font-normal text-gray-400">/mes</span></p>
+          <p class="text-sm text-gray-400 mb-6">Cobro mensual recurrente</p>
+          <ul class="space-y-3">
+            <li>✅ Contenido profesional con certificados digitales</li>
+            <li>❌ Certificados físicos</li>
+            <li>❌ Escuelas especializadas</li>
+            <li>❌ Eventos exclusivos</li>
+            <li>❌ Descarga de contenido</li>
+          </ul>
+        </div>
+        <a th:href="@{/Index}" class="mt-8 bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-lg font-semibold text-center">
+          Suscríbete a Plan Basic
+        </a>
+      </div>
+
+      <!-- Plan Expert -->
+      <div class="bg-emerald-700 rounded-2xl p-8 shadow-xl flex flex-col justify-between relative">
+        <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-400 text-gray-900 text-sm font-semibold px-4 py-1 rounded-full">AHORRAS 7 MESES</span>
+        <div>
+          <h2 class="text-2xl font-bold mb-2">Plan Expert</h2>
+          <p class="text-gray-200 mb-4">Para 1 estudiante</p>
+          <p class="text-3xl font-bold text-white mb-1">S/890<span class="text-lg font-normal text-gray-200">/año</span></p>
+          <p class="text-sm text-gray-100 mb-6">Pago anual</p>
+          <ul class="space-y-3">
+            <li>✅ Certificados digitales y físicos</li>
+            <li>✅ Escuelas especializadas</li>
+            <li>✅ Eventos exclusivos</li>
+            <li>✅ Descarga de contenido</li>
+          </ul>
+        </div>
+        <a th:href="@{/login}" class="mt-8 bg-white text-emerald-700 hover:bg-gray-100 py-2 rounded-lg font-semibold text-center">
+          Suscríbete a Plan Expert
+        </a>
+      </div>
+
+    <!-- Contenedor alterno (empresas) -->
+    <div id="planes-empresas" class="hidden max-w-4xl text-center text-gray-300 mt-8">
+      <p>✨ Próximamente planes especiales para empresas.</p>
+    </div>
+  </main>
+
+  <script>
+    // Cambio entre Personas / Empresas
+    const btnPersonas = document.getElementById('btn-personas');
+    const btnEmpresas = document.getElementById('btn-empresas');
+    const personas = document.getElementById('planes-personas');
+    const empresas = document.getElementById('planes-empresas');
+
+    btnPersonas.addEventListener('click', () => {
+      personas.classList.remove('hidden');
+      empresas.classList.add('hidden');
+      btnPersonas.classList.add('bg-emerald-600', 'text-white');
+      btnEmpresas.classList.remove('bg-emerald-600', 'text-white');
+    });
+
+    btnEmpresas.addEventListener('click', () => {
+      empresas.classList.remove('hidden');
+      personas.classList.add('hidden');
+      btnEmpresas.classList.add('bg-emerald-600', 'text-white');
+      btnPersonas.classList.remove('bg-emerald-600', 'text-white');
+    });
+  </script>
+</body>
+
+</html>
