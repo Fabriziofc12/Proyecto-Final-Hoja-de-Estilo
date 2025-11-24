@@ -1,6 +1,8 @@
 /****************************
  * VARIABLES
  ****************************/
+/* Nuevo color para el fondo general (gray-900) */
+/* Nuevo color para texto en fondo oscuro */
 /****************************
  * MIXINS
  ****************************/
@@ -22,47 +24,116 @@
  ****************************/
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: #f9fafb;
-  color: #1f2937;
+  font-family: 'Inter', sans-serif;
+  background: #111827;
+  color: #d1d5db;
+  min-height: 100vh;
 }
 /****************************
- * CONTENEDOR PRINCIPAL
+ * CONTENEDOR PRINCIPAL Y GRID
  ****************************/
 .contacto {
+  padding: 4rem 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  padding: 2rem;
-  background: linear-gradient(135deg, #00e284, #00af66);
+  /* Fondo con sutil gradiente radial para el tema oscuro */
+  background: radial-gradient(circle at top left, rgba(0, 175, 102, 0.1) 0%, transparent 50%);
+}
+.contacto-grid {
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+}
+/****************************
+ * PANEL DE INFORMACIÓN
+ ****************************/
+.info-panel {
+  background-color: #00af66;
+  color: #ffffff;
+  border-radius: 1rem;
+  padding: 3rem;
+  /* Sombra más fuerte para el tema oscuro */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  /* Usa el mixin de sombra fuerte */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.info-panel h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+.info-panel p {
+  margin-bottom: 2rem;
+  font-size: 1.125rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.9);
+}
+.info-panel .items-start {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+.info-panel .items-start svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+.info-panel .items-start h3 {
+  font-weight: 600;
+  margin: 0;
+}
+.info-panel .items-start .text-sm {
+  font-size: 0.875rem;
 }
 /****************************
  * FORMULARIO DE CONTACTO
  ****************************/
+.formulario-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .formulario {
   background: #ffffff;
   border-radius: 1rem;
   padding: 2.5rem 3rem;
   width: 100%;
-  max-width: 500px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  /* Sombra más fuerte para el tema oscuro */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  /* Usa el mixin de sombra fuerte */
   animation: fadeInScale 0.8s ease both;
-  /* Efecto hover del formulario */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.formulario:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
 }
 .formulario h1 {
-  text-align: center;
+  text-align: left;
   color: #00af66;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
 }
 .formulario form {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
 }
+.formulario form div {
+  display: flex;
+  flex-direction: column;
+}
 .formulario form label {
   font-weight: 600;
   margin-bottom: 0.3rem;
+  color: #1f2937;
+  /* Aseguramos que se vea en el fondo blanco */
 }
 .formulario form input,
 .formulario form textarea {
@@ -77,7 +148,8 @@ body {
 .formulario form textarea:focus {
   border-color: #00af66;
   outline: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  /* Efecto de anillo de foco */
+  box-shadow: 0 0 0 3px rgba(0, 175, 102, 0.3);
 }
 .formulario form textarea {
   resize: vertical;
@@ -92,31 +164,35 @@ body {
   cursor: pointer;
   font-weight: 600;
   transition: all 0.3s ease;
-  align-self: center;
-  width: 50%;
+  box-shadow: 0 4px 10px rgba(0, 175, 102, 0.4);
+  align-self: flex-start;
+  width: auto;
+  min-width: 150px;
   text-align: center;
 }
 .formulario form .btn:hover {
   background-color: #007c48;
-  transform: scale(1.05);
-}
-.formulario:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 175, 102, 0.5);
 }
 /****************************
  * MEDIA QUERIES
  ****************************/
+@media (min-width: 1024px) {
+  .contacto-grid {
+    grid-template-columns: 2fr 3fr;
+    /* Layout de 2 columnas en desktop */
+  }
+}
 @media (max-width: 768px) {
   .formulario {
     padding: 2rem;
-    max-width: 400px;
   }
   .formulario h1 {
-    font-size: 1.6rem;
+    font-size: 2rem;
   }
-  .formulario form .btn {
-    width: 100%;
+  .info-panel {
+    padding: 2rem;
   }
 }
 @media (max-width: 480px) {
@@ -124,16 +200,9 @@ body {
     padding: 1.5rem;
   }
   .formulario h1 {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
   }
-  .formulario form {
-    gap: 1rem;
-  }
-  .formulario form input,
-  .formulario form textarea {
-    font-size: 0.9rem;
-  }
-  .formulario form .btn {
-    font-size: 0.9rem;
+  .info-panel h2 {
+    font-size: 2rem;
   }
 }

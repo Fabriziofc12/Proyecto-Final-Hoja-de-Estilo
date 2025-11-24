@@ -5,13 +5,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SmartAcademy - Cursos</title>
-
-    <link href="/CSS/output.css" rel="stylesheet" />
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fuente Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tu CSS compilado (¡Importante!) -->
     <link rel="stylesheet" href="/CSS/cursos.css" />
+    <!-- Estilo de respaldo por si el CSS no carga en la vista previa -->
+    <style>
+        /* Agregamos una clase básica por si falla el LESS en el preview */
+        .modal-overlay { display: none; }
+        .modal-overlay.active { display: flex; }
+    </style>
 </head>
 
 <body class="cursos-page">
-     <header class="sticky top-0 z-50 bg-gray-900/95 backdrop-blur-md border-b border-gray-700 shadow-lg">
+    
+    <!-- Navbar -->
+    
+    <header class="sticky top-0 z-50 bg-gray-900/95 backdrop-blur-md border-b border-gray-700 shadow-lg">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex items-center flex-shrink-0">
@@ -104,133 +116,217 @@
             </div>
         </div>
     </header>
+
     <main>
-        <section class="cursos-hero-section bg-gray-100 py-12 border-b border-gray-200">
-            <div class="max-w-6xl mx-auto px-6">
-                <div class="hero-text text-center mb-8">
-                    <h1 class="text-4xl font-extrabold text-gray-900">Catálogo de Cursos</h1>
-                    <p class="text-lg text-gray-600 mt-2">Explora nuestros cursos en línea y mejora tus habilidades. Filtra, aprende y alcanza tus metas.</p>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Aprende las habilidades del mañana, hoy.</h1>
+                    <p>Explora nuestro catálogo completo de cursos tecnológicos.</p>
                 </div>
+                <div class="hero-search">
+                    <form onsubmit="return false;">
+                        <input id="searchInput" type="text" placeholder="¿Qué quieres aprender?">
+                        <button type="button" id="searchBtn">Buscar</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Grid de Cursos -->
+        <section class="cursos-grid" id="coursesGrid">
+            
+            <!-- CURSO 1: BACKEND -->
+            <article class="curso-card" 
+                data-title="Master en Backend con Java" 
+                data-desc="Domina el desarrollo del lado del servidor utilizando las tecnologías más demandadas: Java, Spring Boot y microservicios."
+                data-instructor="Juan Pérez"
+                data-level="Avanzado"
+                data-duration="40h"
+                data-image="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1200"
+                data-temario='["Introducción a Java Enterprise", "Spring Boot desde cero", "APIs RESTful seguras con JWT", "Microservicios con Docker", "Despliegue en AWS"]'>
                 
-                <form id="searchForm" class="max-w-xl mx-auto" onsubmit="return false;">
-                    <div class="flex gap-3">
-                        <input id="searchInput" type="search" placeholder="Buscar por título o descripción..."
-                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-500" />
-                        <button id="searchBtn" type="button"
-                                class="px-5 py-3 rounded-lg bg-emerald-600 text-white font-semibold hover:bg-emerald-700 transition">
-                            Buscar
-                        </button>
+                <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1200" alt="Curso Backend">
+                <div class="info">
+                    <h2>Master en Backend con Java</h2>
+                    <p>Aprende Spring y Java para construir arquitecturas robustas.</p>
+                    <div class="meta-data">
+                        <span>👨‍🏫 Juan Pérez</span>
+                        <span>⏱️ 40 horas</span>
                     </div>
-                </form>
+                    <button class="btn">Ver Detalles del Curso</button>
+                </div>
+            </article>
+
+            <!-- CURSO 2: FRONTEND -->
+            <article class="curso-card" 
+                data-title="Desarrollo Frontend con Tailwind" 
+                data-desc="Crea interfaces modernas, responsivas y accesibles utilizando la potencia de CSS utility-first y JavaScript moderno."
+                data-instructor="María López"
+                data-level="Intermedio"
+                data-duration="30h"
+                data-image="https://images.unsplash.com/photo-1621839675971-8742d88a10b4?q=80&w=1200"
+                data-temario='["Fundamentos de Diseño Web", "Tailwind CSS a fondo", "Diseño Responsivo (Mobile First)", "Componentes dinámicos con JS", "Optimización de assets"]'>
+                
+                <img src="https://images.unsplash.com/photo-1621839675971-8742d88a10b4?q=80&w=1200" alt="Curso Frontend">
+                <div class="info">
+                    <h2>Desarrollo Frontend con Tailwind</h2>
+                    <p>Diseña interfaces increíbles sin salir de tu HTML.</p>
+                    <div class="meta-data">
+                        <span>👩‍🏫 María López</span>
+                        <span>⏱️ 30 horas</span>
+                    </div>
+                    <button class="btn">Ver Detalles del Curso</button>
+                </div>
+            </article>
+
+            <!-- CURSO 3: UX/UI -->
+            <article class="curso-card" 
+                data-title="Diseño de Experiencia de Usuario" 
+                data-desc="Aprende a investigar, prototipar y diseñar productos digitales que los usuarios amen. De la teoría a la práctica en Figma."
+                data-instructor="Carlos Ramírez"
+                data-level="Básico"
+                data-duration="25h"
+                data-image="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1200"
+                data-temario='["Psicología del Usuario", "User Research & Personas", "Wireframing y Prototipado", "Figma Avanzado", "Pruebas de Usabilidad"]'>
+                
+                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1200" alt="Curso UX">
+                <div class="info">
+                    <h2>Diseño de Experiencia de Usuario</h2>
+                    <p>Domina Figma y los principios de diseño centrado en el usuario.</p>
+                    <div class="meta-data">
+                        <span>👨‍🏫 Carlos Ramírez</span>
+                        <span>⏱️ 25 horas</span>
+                    </div>
+                    <button class="btn">Ver Detalles del Curso</button>
+                </div>
+            </article>
+
+            <!-- Mensaje de no resultados -->
+            <div id="noResults" class="hidden text-center col-span-full py-10">
+                <p class="text-2xl font-medium text-gray-400">No se encontraron cursos que coincidan con la búsqueda.</p>
             </div>
         </section>
-
-        <section class="py-16 bg-gray-50">
-            <div class="max-w-6xl mx-auto px-6 grid gap-8 sm:grid-cols-2 lg:grid-cols-3" id="coursesGrid">
-                
-                <div class="curso-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition" data-title="Master en Backend" data-desc="Aprende Spring y Java">
-                    <a href="curso-detalle-1.html">
-                        <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1200&auto=format&fit=crop" alt="Master en Backend" class="w-full h-48 object-cover curso-card-img" />
-                        <div class="p-6">
-                            <h2 class="text-xl font-semibold text-emerald-600 curso-card-title">Master en Backend con Java</h2>
-                            <p class="text-gray-600 mt-2 curso-card-instructor">Juan Pérez</p>
-                            <p class="text-gray-700 mt-4 curso-card-level">Nivel: Avanzado</p>
-                            <div class="mt-3 text-sm text-gray-500">Duración: 40 horas</div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="curso-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition" data-title="Frontend Web" data-desc="Tailwind y JS">
-                    <a href="curso-detalle-2.html">
-                        <img src="https://images.unsplash.com/photo-1621839675971-8742d88a10b4?q=80&w=1200&auto=format&fit=crop" alt="Frontend Web" class="w-full h-48 object-cover curso-card-img" />
-                        <div class="p-6">
-                            <h2 class="text-xl font-semibold text-emerald-600 curso-card-title">Desarrollo Frontend con Tailwind</h2>
-                            <p class="text-gray-600 mt-2 curso-card-instructor">María López</p>
-                            <p class="text-gray-700 mt-4 curso-card-level">Nivel: Intermedio</p>
-                            <div class="mt-3 text-sm text-gray-500">Duración: 30 horas</div>
-                        </div>
-                    </a>
-                </div>
-                
-                <div class="curso-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition" data-title="Diseño UX" data-desc="Figma y Prototipado">
-                    <a href="curso-detalle-3.html">
-                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1200&auto=format&fit=crop" alt="Diseño UX" class="w-full h-48 object-cover curso-card-img" />
-                        <div class="p-6">
-                            <h2 class="text-xl font-semibold text-emerald-600 curso-card-title">Diseño de Experiencia de Usuario</h2>
-                            <p class="text-gray-600 mt-2 curso-card-instructor">Carlos Ramírez</p>
-                            <p class="text-gray-700 mt-4 curso-card-level">Nivel: Básico</p>
-                            <div class="mt-3 text-sm text-gray-500">Duración: 25 horas</div>
-                        </div>
-                    </a>
-                </div>
-
-
-                <div id="noResults" class="hidden sm:col-span-2 lg:col-span-3 text-center py-10">
-                    <p class="text-2xl font-medium text-gray-400">No se encontraron cursos que coincidan con la búsqueda.</p>
-                </div>
-            </div>
-        </section>
-
     </main>
-    
+
+    <!-- MODAL DE CURSO -->
+    <div id="courseModalOverlay" class="modal-overlay">
+        <div class="modal-content">
+            <button id="closeModalBtn" class="modal-close-btn">&times;</button>
+            
+            <div class="modal-header">
+                <img id="modalImg" src="" alt="Portada del curso">
+                <div class="modal-title-container">
+                    <h2 id="modalTitle">Título del Curso</h2>
+                    <div class="modal-badges">
+                        <span id="modalInstructor">Instructor</span>
+                        <span id="modalLevel">Nivel</span>
+                        <span id="modalDuration">Duración</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <h3>Descripción</h3>
+                <p id="modalDesc">Descripción detallada del curso...</p>
+
+                <h3>Temario del Curso</h3>
+                <ul id="modalTemario" class="temario-list">
+                    <!-- Los temas se insertarán aquí con JS -->
+                </ul>
+                
+                <button class="modal-action-btn">Inscribirme Ahora</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-    (function () {
-        // Asumiendo que el header tiene el mismo JS que index.html, aquí solo controlamos el buscador.
+        // Lógica del Modal de Cursos
+        document.addEventListener('DOMContentLoaded', () => {
+            const modalOverlay = document.getElementById('courseModalOverlay');
+            const closeBtn = document.getElementById('closeModalBtn');
+            const courseCards = document.querySelectorAll('.curso-card');
 
-        const searchInput = document.getElementById('searchInput');
-        const searchBtn = document.getElementById('searchBtn');
-        const noResultsEl = document.getElementById('noResults');
+            // Elementos del Modal
+            const mTitle = document.getElementById('modalTitle');
+            const mDesc = document.getElementById('modalDesc');
+            const mImg = document.getElementById('modalImg');
+            const mInstructor = document.getElementById('modalInstructor');
+            const mLevel = document.getElementById('modalLevel');
+            const mDuration = document.getElementById('modalDuration');
+            const mTemario = document.getElementById('modalTemario');
 
-        const getCourseCards = () => document.querySelectorAll('.curso-card');
+            // Función abrir modal
+            courseCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const title = card.dataset.title;
+                    const desc = card.dataset.desc;
+                    const instructor = card.dataset.instructor;
+                    const level = card.dataset.level;
+                    const duration = card.dataset.duration;
+                    const image = card.dataset.image;
+                    const temario = JSON.parse(card.dataset.temario || '[]');
 
-        function normalizeText(s) {
-            return (s || '').toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().toLowerCase();
-        }
+                    mTitle.textContent = title;
+                    mDesc.textContent = desc;
+                    mInstructor.textContent = `Prof: ${instructor}`;
+                    mLevel.textContent = level;
+                    mDuration.textContent = duration;
+                    mImg.src = image;
 
-        function filterCourses(query) {
-            const q = normalizeText(query);
-            const cards = getCourseCards();
-            let anyVisible = false;
+                    mTemario.innerHTML = '';
+                    temario.forEach(tema => {
+                        const li = document.createElement('li');
+                        li.textContent = tema;
+                        mTemario.appendChild(li);
+                    });
 
-            cards.forEach(card => {
-                const title = normalizeText(card.getAttribute('data-title') || (card.querySelector('h2') ? card.querySelector('h2').textContent : ''));
-                const desc  = normalizeText(card.getAttribute('data-desc')  || (card.querySelector('p') ? card.querySelector('p').textContent  : ''));
-
-                const match = q === '' || title.includes(q) || desc.includes(q);
-                card.style.display = match ? '' : 'none';
-                if (match) anyVisible = true;
+                    modalOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden'; 
+                });
             });
 
-            if (noResultsEl) {
-                noResultsEl.classList.toggle('hidden', anyVisible);
+            const closeModal = () => {
+                modalOverlay.classList.remove('active');
+                document.body.style.overflow = ''; 
+            };
+
+            closeBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); 
+                closeModal();
+            });
+
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) closeModal();
+            });
+            
+            // Buscador Simple
+            const searchInput = document.getElementById('searchInput');
+            const searchBtn = document.getElementById('searchBtn');
+            const noResults = document.getElementById('noResults');
+
+            const filterCourses = (query) => {
+                const term = query.toLowerCase();
+                let hasResults = false;
+                
+                courseCards.forEach(card => {
+                    const title = card.dataset.title.toLowerCase();
+                    if(title.includes(term)) {
+                        card.style.display = 'flex'; // Importante: usar flex para no romper el diseño
+                        hasResults = true;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                noResults.style.display = hasResults ? 'none' : 'block';
+            };
+
+            if(searchInput) {
+                searchInput.addEventListener('input', (e) => filterCourses(e.target.value));
             }
-        }
-
-        if (searchInput) {
-            searchInput.addEventListener('input', (e) => filterCourses(e.target.value));
-        }
-
-        if (searchBtn) {
-            searchBtn.addEventListener('click', () => filterCourses(searchInput ? searchInput.value : ''));
-        }
-
-        // Inicializar si hay query en URL
-        window.addEventListener('load', () => {
-             try {
-                const params = new URLSearchParams(window.location.search);
-                const q = params.get('q');
-                if (q && searchInput) {
-                    searchInput.value = q;
-                    filterCourses(q);
-                } else if (searchInput) {
-                    filterCourses(searchInput.value); // asegurar que se aplica el filtro inicial (muestra todo)
-                }
-             } catch (err) { }
         });
-
-    })();
     </script>
-
 </body>
-
 </html>

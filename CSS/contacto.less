@@ -6,13 +6,16 @@
 @color-texto: #1f2937;
 @color-blanco: #ffffff;
 @color-borde: #d1d5db;
+@color-fondo-oscuro: #111827; /* Nuevo color para el fondo general (gray-900) */
+@color-texto-oscuro: #d1d5db; /* Nuevo color para texto en fondo oscuro */
 @transicion-base: all 0.3s ease;
 
 /****************************
  * MIXINS
  ****************************/
 .sombra(@nivel: 0.1) {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, @nivel);
+  /* Sombra más fuerte para el tema oscuro */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, @nivel * 1.5);
 }
 
 .input-base() {
@@ -26,7 +29,8 @@
   &:focus {
     border-color: @color-primario;
     outline: none;
-    .sombra(0.15);
+    /* Efecto de anillo de foco */
+    box-shadow: 0 0 0 3px rgba(0, 175, 102, 0.3);
   }
 }
 
@@ -39,10 +43,12 @@
   cursor: pointer;
   font-weight: 600;
   transition: @transicion-base;
+  box-shadow: 0 4px 10px rgba(0, 175, 102, 0.4);
 
   &:hover {
     background-color: darken(@colorFondo, 10%);
-    transform: scale(1.05);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 175, 102, 0.5);
   }
 }
 
@@ -59,39 +65,110 @@
  ****************************/
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: @color-secundario;
-  color: @color-texto;
+  font-family: 'Inter', sans-serif;
+  background: @color-fondo-oscuro;
+  color: @color-texto-oscuro;
+  min-height: 100vh;
 }
 
 /****************************
- * CONTENEDOR PRINCIPAL
+ * CONTENEDOR PRINCIPAL Y GRID
  ****************************/
 .contacto {
+  padding: 4rem 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  padding: 2rem;
-  background: linear-gradient(135deg, lighten(@color-primario, 10%), @color-primario);
+  /* Fondo con sutil gradiente radial para el tema oscuro */
+  background: radial-gradient(circle at top left, rgba(0, 175, 102, 0.1) 0%, transparent 50%);
 }
+
+.contacto-grid {
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr; 
+}
+
+/****************************
+ * PANEL DE INFORMACIÓN
+ ****************************/
+.info-panel {
+  background-color: @color-primario;
+  color: @color-blanco;
+  border-radius: 1rem;
+  padding: 3rem;
+  .sombra(0.3); /* Usa el mixin de sombra fuerte */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    margin-bottom: 2rem;
+    font-size: 1.125rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .items-start {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    
+    svg {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-right: 0.75rem;
+        flex-shrink: 0;
+    }
+    
+    h3 {
+        font-weight: 600;
+        margin: 0;
+    }
+    
+    .text-sm {
+        font-size: 0.875rem;
+    }
+  }
+}
+
 
 /****************************
  * FORMULARIO DE CONTACTO
  ****************************/
+.formulario-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .formulario {
   background: @color-blanco;
   border-radius: 1rem;
   padding: 2.5rem 3rem;
   width: 100%;
-  max-width: 500px;
-  .sombra(0.2);
+  .sombra(0.3); /* Usa el mixin de sombra fuerte */
   animation: fadeInScale 0.8s ease both;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4); 
+  }
 
   h1 {
-    text-align: center;
+    text-align: left;
     color: @color-primario;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
   }
 
   form {
@@ -99,9 +176,15 @@ body {
     flex-direction: column;
     gap: 1.2rem;
 
+    div {
+        display: flex;
+        flex-direction: column;
+    }
+
     label {
       font-weight: 600;
       margin-bottom: 0.3rem;
+      color: @color-texto; /* Aseguramos que se vea en el fondo blanco */
     }
 
     input,
@@ -116,58 +199,47 @@ body {
 
     .btn {
       .boton(@color-primario);
-      align-self: center;
-      width: 50%;
+      align-self: flex-start; 
+      width: auto;
+      min-width: 150px;
       text-align: center;
     }
   }
-
-  /* Efecto hover del formulario */
-  &:hover {
-    transform: translateY(-5px);
-    .sombra(0.3);
-  }
 }
+
 
 /****************************
  * MEDIA QUERIES
  ****************************/
+@media (min-width: 1024px) {
+  .contacto-grid {
+    grid-template-columns: 2fr 3fr; /* Layout de 2 columnas en desktop */
+  }
+}
+
 @media (max-width: 768px) {
   .formulario {
     padding: 2rem;
-    max-width: 400px;
 
     h1 {
-      font-size: 1.6rem;
+      font-size: 2rem;
     }
-
-    form {
-      .btn {
-        width: 100%;
-      }
-    }
+  }
+  .info-panel {
+    padding: 2rem;
   }
 }
 
 @media (max-width: 480px) {
   .formulario {
     padding: 1.5rem;
-
-    h1 {
-      font-size: 1.4rem;
-    }
-
-    form {
-      gap: 1rem;
-
-      input,
-      textarea {
-        font-size: 0.9rem;
-      }
-
-      .btn {
-        font-size: 0.9rem;
-      }
+  }
+  .formulario h1 {
+    font-size: 1.8rem;
+  }
+  .info-panel {
+    h2 {
+        font-size: 2rem;
     }
   }
 }

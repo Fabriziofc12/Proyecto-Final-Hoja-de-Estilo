@@ -1,180 +1,282 @@
+@charset "UTF-8";
+/* ARCHIVO: instructores.scss 
+   DESCRIPCIÓN: Grid de 3 columnas, Imágenes centradas y Modal interactivo.
+*/
 /****************************
- * VARIABLES
+ * 1. VARIABLES
  ****************************/
 /****************************
- * MIXINS
+ * 2. MIXINS
  ****************************/
 /****************************
- * ANIMACIONES
+ * 3. ESTILOS PRINCIPALES
  ****************************/
-@keyframes aparecer {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-/****************************
- * ESTILOS GLOBALES
- ****************************/
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: #f3f4f6;
-  color: #1f2937;
-}
-/****************************
- * HEADER
- ****************************/
-.header {
-  background-color: #00af66;
-  color: #ffffff;
-  text-align: center;
-  padding: 3rem 1rem;
-  /* 📱 Responsive */
-}
-.header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-  transition: color 0.4s ease;
-}
-.header h1:hover {
-  color: #ffffff;
-}
-.header p {
-  font-size: 1.1rem;
-  opacity: 0.9;
-}
-@media (max-width: 600px) {
-  .header {
-    padding: 2rem 1rem;
-  }
-  .header h1 {
-    font-size: 1.8rem;
-  }
-  .header p {
-    font-size: 1rem;
-  }
-}
-/****************************
- * SECCIÓN INSTRUCTORES
- ****************************/
-.instructores {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  padding: 3rem 1rem;
+.instructores-container {
   max-width: 1200px;
   margin: 0 auto;
-  /* 📱 Media Queries para distintos tamaños */
+}
+
+.instructores-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr;
 }
 @media (min-width: 768px) {
-  .instructores {
+  .instructores-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 @media (min-width: 1024px) {
-  .instructores {
+  .instructores-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
-.instructores .tarjeta {
+.instructores-grid .instructor-card {
   background: #ffffff;
   border-radius: 1rem;
-  text-align: center;
-  padding: 2rem 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
-  animation: aparecer 0.8s ease both;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.instructores .tarjeta:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+.instructores-grid .instructor-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
-.instructores .tarjeta img {
+.instructores-grid .instructor-card .card-header-accent {
+  height: 6px;
+  background: #059669;
+}
+.instructores-grid .instructor-card .card-header-accent.accent-blue {
+  background: #3b82f6;
+}
+.instructores-grid .instructor-card .card-header-accent.accent-purple {
+  background: #8b5cf6;
+}
+.instructores-grid .instructor-card .card-header-accent.accent-orange {
+  background: #f97316;
+}
+.instructores-grid .instructor-card .instructor-image-wrapper {
+  margin-top: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.instructores-grid .instructor-card .instructor-image-wrapper .instructor-photo {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  object-fit: cover;
-  margin: 0 auto 1rem auto;
-  display: block;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border: 5px solid white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
 }
-.instructores .tarjeta img:hover {
-  transform: rotate(5deg) scale(1.05);
+.instructores-grid .instructor-card:hover .instructor-photo {
+  transform: scale(1.1);
 }
-.instructores .tarjeta h2 {
-  margin-bottom: 0.3rem;
-  font-size: 1.3rem;
+.instructores-grid .instructor-card .card-content {
+  padding: 1.5rem 2rem 2.5rem;
+  text-align: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
-.instructores .tarjeta h3 {
-  color: #00af66;
+.instructores-grid .instructor-card .card-content .instructor-name {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #111827;
+}
+.instructores-grid .instructor-card .card-content .instructor-role {
+  color: #059669;
   font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
   margin-bottom: 1rem;
 }
-.instructores .tarjeta p {
-  font-size: 0.9rem;
+.instructores-grid .instructor-card .card-content .instructor-bio {
+  color: #6b7280;
+  font-size: 0.95rem;
+  line-height: 1.5;
   margin-bottom: 1.5rem;
-  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
-.instructores .tarjeta .btn {
-  background-color: #00af66;
-  color: #ffffff;
-  border: none;
-  border-radius: 8px;
-  padding: 0.6rem 1.2rem;
-  cursor: pointer;
+.instructores-grid .instructor-card .card-content .stats-container {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+.instructores-grid .instructor-card .card-content .stats-container .stat-badge {
+  background: #f3f4f6;
+  font-size: 0.8rem;
   font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: 0.5rem;
+}
+.instructores-grid .instructor-card .card-content .btn-profile {
+  background: transparent;
+  color: #059669;
+  border: 1px solid rgb(59.5161290323, 248.4838709677, 189.8387096774);
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: auto;
+}
+.instructores-grid .instructor-card .card-content .btn-profile:hover {
+  background: #059669;
+  color: white;
+  border-color: #059669;
+}
+.instructores-grid .instructor-card .card-content .btn-profile.hover-blue:hover {
+  background: #3b82f6;
+  border-color: #3b82f6;
+}
+.instructores-grid .instructor-card .card-content .btn-profile.hover-purple:hover {
+  background: #8b5cf6;
+  border-color: #8b5cf6;
+}
+
+/****************************
+ * 4. ESTILOS DEL MODAL (REQUERIMIENTO)
+ ****************************/
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  z-index: 60;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
   transition: all 0.3s ease;
 }
-.instructores .tarjeta .btn:hover {
-  background-color: #007c48;
-  transform: scale(1.05);
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
 }
-@media (max-width: 768px) {
-  .instructores .tarjeta {
-    padding: 1.5rem 0.8rem;
-  }
-  .instructores .tarjeta img {
-    width: 100px;
-    height: 100px;
-  }
-  .instructores .tarjeta h2 {
-    font-size: 1.1rem;
-  }
-  .instructores .tarjeta p {
-    font-size: 0.85rem;
-  }
-  .instructores .tarjeta .btn {
-    padding: 0.5rem 1rem;
-    font-size: 0.85rem;
-  }
+.modal-overlay.active .modal-content {
+  transform: translateY(0);
 }
-@media (max-width: 480px) {
-  .instructores .tarjeta img {
-    width: 80px;
-    height: 80px;
-  }
-  .instructores .tarjeta h2 {
-    font-size: 1rem;
-  }
-  .instructores .tarjeta h3 {
-    font-size: 0.9rem;
-  }
-  .instructores .tarjeta p {
-    font-size: 0.8rem;
-  }
+.modal-overlay .modal-content {
+  background: white;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 1rem;
+  padding: 2.5rem;
+  position: relative;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  transform: translateY(50px);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  max-height: 90vh;
+  overflow-y: auto;
 }
+.modal-overlay .modal-content .modal-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  line-height: 1;
+  color: #6b7280;
+  cursor: pointer;
+}
+.modal-overlay .modal-content .modal-close-btn:hover {
+  color: #111827;
+}
+.modal-overlay .modal-content .modal-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1.5rem;
+}
+.modal-overlay .modal-content .modal-header .modal-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.modal-overlay .modal-content .modal-header .modal-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #111827;
+  margin: 0;
+}
+.modal-overlay .modal-content .modal-header .modal-subtitle {
+  color: #059669;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.modal-overlay .modal-content .modal-section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+.modal-overlay .modal-content .modal-text {
+  color: #6b7280;
+  line-height: 1.6;
+}
+.modal-overlay .modal-content .modal-course-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.modal-overlay .modal-content .modal-course-list li {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  border-bottom: 1px solid #f3f4f6;
+  color: rgb(83.7787234043, 89.2595744681, 100.2212765957);
+}
+.modal-overlay .modal-content .modal-course-list li:last-child {
+  border-bottom: none;
+}
+.modal-overlay .modal-content .modal-footer {
+  margin-top: 2rem;
+  text-align: right;
+}
+.modal-overlay .modal-content .modal-footer .modal-btn-action {
+  background: #059669;
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.modal-overlay .modal-content .modal-footer .modal-btn-action:hover {
+  background: rgb(3.3548387097, 100.6451612903, 70.4516129032);
+}
+
 /****************************
- * FOOTER
+ * 5. MEDIA QUERIES
  ****************************/
-.footer {
-  background-color: #1f2937;
-  color: #ffffff;
-  text-align: center;
-  padding: 1.5rem;
-  font-size: 0.9rem;
-}
+@media (max-width: 640px) {
+  .modal-content {
+    padding: 1.5rem !important;
+  }
+  .modal-content .modal-header {
+    flex-direction: column;
+    text-align: center;
+  }
+}/*# sourceMappingURL=instructores.css.map */
