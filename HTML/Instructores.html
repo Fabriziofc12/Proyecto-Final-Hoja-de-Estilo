@@ -202,6 +202,7 @@
             </article>
         </section>
     </main>
+    
 
     <!-- MODAL (Oculto por defecto) -->
     <div id="modal-overlay" class="modal-overlay">
@@ -230,10 +231,65 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-white border-t border-gray-200 pt-12 pb-8">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <p class="text-sm text-gray-400">&copy; 2024 SmartAcademy. Todos los derechos reservados.</p>
+    <!-- FOOTER: La sección consistente y simplificada -->
+    <footer class="bg-gray-900 text-white mt-auto">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <!-- Sección Superior del Footer (Información, Navegación y Redes) -->
+            <div class="grid grid-cols-1 gap-12 md:grid-cols-3 lg:grid-cols-4">
+                
+                <!-- Columna 1: Información del Sitio (Logo y Contacto) -->
+                <div class="col-span-1 md:col-span-1 lg:col-span-2">
+                    <h3 class="text-3xl font-extrabold tracking-tight text-white mb-4">
+                        <span class="text-indigo-400">Mi</span> Sitio Web
+                    </h3>
+                    <p class="text-gray-400 text-sm max-w-sm">
+                        Somos la plataforma líder para [breve descripción de tu sitio]. Comprometidos con la calidad y la información.
+                    </p>
+                    <div class="mt-4 text-sm space-y-2">
+                        <p class="text-indigo-400 font-semibold">Contacto:</p>
+                        <p class="text-gray-400">correo@misitioweb.com</p>
+                        <p class="text-gray-400">+34 123 456 789</p>
+                    </div>
+                </div>
+
+                <!-- Columna 2: Páginas (Navegación) -->
+                <div>
+                    <h3 class="text-sm font-semibold tracking-wider uppercase text-indigo-400">Páginas Principales</h3>
+                    <ul role="list" class="mt-4 space-y-4">
+                        <li><a href="#" class="text-base text-gray-300 hover:text-indigo-400 text-link">Inicio</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-indigo-400 text-link">Acerca de Nosotros</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-indigo-400 text-link">Servicios</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-indigo-400 text-link">Blog</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-indigo-400 text-link">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <!-- Columna 3: Redes Sociales (iconos SVG) -->
+                <div>
+                    <h3 class="text-sm font-semibold tracking-wider uppercase text-indigo-400">Síguenos</h3>
+                    <div class="mt-4 flex space-x-6">
+                        <!-- Icono de X (Twitter) - Versión estándar limpia -->
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300" aria-label="Síguenos en X">
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.901 1.153h3.68c-.687.305-1.425.541-2.193.707.828-.495 1.458-1.277 1.754-2.203-.77.458-1.62.793-2.527.973-.728-.773-1.764-1.258-2.909-1.258-2.196 0-3.98 1.784-3.98 3.98 0 .313.036.618.106.91-3.308-.168-6.236-1.752-8.197-4.156-.342.587-.535 1.273-.535 2.008 0 1.378.703 2.593 1.77 3.308-.653-.021-1.267-.2-1.798-.5v.05c0 1.933 1.376 3.55 3.204 3.921-.334.091-.685.139-1.048.139-.257 0-.507-.025-.75-.072.508 1.59 1.983 2.748 3.737 2.78-1.365 1.07-3.088 1.705-4.978 1.705-.323 0-.64-.018-.953-.056 1.766 1.132 3.861 1.795 6.118 1.795 7.34 0 11.35-6.082 11.35-11.35 0-.173-.004-.345-.012-.516.78-.56 1.458-1.258 1.996-2.046z"/></svg>
+                        </a>
+                        <!-- Icono de LinkedIn (Placeholder) -->
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300" aria-label="Conéctanos en LinkedIn">
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0H5C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM8 19H5V8h3v11zM6.5 6.5A1.5 1.5 0 1 1 8 5a1.5 1.5 0 0 1-1.5 1.5zM20 19h-3v-5.64c0-1.3-.47-2.19-1.63-2.19-1.16 0-1.85.79-1.85 2.19V19h-3V8h3v1.89c.47-.7 1.22-1.89 3.32-1.89 2.42 0 4.25 1.56 4.25 4.96V19z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Sección Inferior del Footer (Derechos de Autor) -->
+            <div class="mt-12 border-t border-gray-700 pt-8">
+                <p class="text-base text-center text-gray-400">
+                    &copy; 2024 Mi Proyecto GitHub Pages. Todos los derechos reservados.
+                </p>
+                <p class="text-sm text-center text-gray-500 mt-1">
+                    Política de Privacidad | Términos de Servicio
+                </p>
+            </div>
         </div>
     </footer>
 

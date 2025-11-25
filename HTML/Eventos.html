@@ -202,7 +202,7 @@
             <!-- Evento 1 -->
             <article class="evento group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full" data-categoria="taller">
                 <div class="relative h-48 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981d?q=80&w=1200&auto=format&fit=crop" alt="Taller Coding" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJuSpGYci-9AZXSTTOGtitOEAwzaZQ-VCYwQ&s" alt="Taller Coding" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-emerald-700 text-xs font-bold px-3 py-1 rounded-full shadow-sm border border-emerald-100">
                         TALLER
                     </div>
@@ -229,7 +229,7 @@
             <!-- Evento 2 -->
             <article class="evento group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full" data-categoria="charla">
                 <div class="relative h-48 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1515165562835-c5f8d17c0b2a?q=80&w=1200&auto=format&fit=crop" alt="Charla UX" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <img src="https://i.ytimg.com/vi/ewJgxHQo0TU/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBuNtwUe95aS0A28rB82KEI2nCyNg" alt="Charla UX" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-purple-700 text-xs font-bold px-3 py-1 rounded-full shadow-sm border border-purple-100">
                         CHARLA
                     </div>
@@ -291,59 +291,117 @@
         </section>
     </main>
 
-    <!-- MODAL RSVP (Estilizado con Tailwind) -->
+    <!-- MODAL RSVP -->
     <div id="rsvpModal" class="fixed inset-0 z-[60] hidden items-center justify-center transition-opacity duration-300 opacity-0 pointer-events-none">
         <!-- Backdrop -->
         <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm" id="modalBackdrop"></div>
         
-        <!-- Contenido Modal -->
-        <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 transform scale-95 transition-transform duration-300 modal-content-transition overflow-hidden">
-            <!-- Header Modal -->
-            <div class="bg-emerald-600 px-6 py-4 flex justify-between items-center">
-                <h3 class="text-lg font-bold text-white">Confirmar Asistencia</h3>
-                <button id="closeRsvp" class="text-emerald-100 hover:text-white transition-colors">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-            </div>
+        <!-- Contenedor principal del modal -->
+        <!-- Clases clave para centrar: fixed inset-0 flex items-center justify-center -->
+        <div id="rsvpModal" class="fixed inset-0 z-50 bg-gray-900 bg-opacity-75 flex items-start md:items-center justify-center p-4 transition-opacity duration-300 opacity-100">
+            
+            <!-- Contenido Modal -->
+            <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-md 
+                        mx-4 mt-8 md:mt-0 
+                        transform scale-100 transition-transform duration-300 
+                        overflow-hidden animate-slide-down">
+                
+                <!-- Header Modal -->
+                <div class="bg-emerald-600 px-6 py-4 flex justify-between items-center">
+                    <h3 class="text-lg font-bold text-white">Confirmar Asistencia</h3>
+                    <button id="closeRsvp" class="text-emerald-100 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
 
-            <div class="p-6">
-                <p class="text-gray-600 mb-1 text-sm">Estás a punto de registrarte para:</p>
-                <p id="rsvpEventTitle" class="text-lg font-bold text-gray-900 mb-6 border-l-4 border-emerald-500 pl-3">Evento seleccionado</p>
+                <div class="p-6">
+                    <p class="text-gray-600 mb-1 text-sm">Estás a punto de registrarte para:</p>
+                    <p id="rsvpEventTitle" class="text-lg font-bold text-gray-900 mb-6 border-l-4 border-emerald-500 pl-3">Evento seleccionado (Ejemplo de Título)</p>
 
-                <form id="rsvpForm" class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Nombre Completo</label>
-                        <input type="text" id="rsvpName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all" placeholder="Ej. Juan Pérez" />
-                    </div>
+                    <form id="rsvpForm" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Nombre Completo</label>
+                            <input type="text" id="rsvpName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all" placeholder="Ej. Juan Pérez" />
+                        </div>
 
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
-                        <input type="email" id="rsvpEmail" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all" placeholder="juan@ejemplo.com" />
-                    </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
+                            <input type="email" id="rsvpEmail" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all" placeholder="juan@ejemplo.com" />
+                        </div>
 
-                    <div class="flex gap-3 pt-2">
-                        <button type="button" id="cancelRsvp" class="flex-1 px-4 py-2.5 rounded-lg border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition-colors">
-                            Cancelar
-                        </button>
-                        <button type="submit" class="flex-1 px-4 py-2.5 rounded-lg bg-emerald-600 text-white font-medium hover:bg-emerald-700 shadow-lg shadow-emerald-200 transition-all transform hover:-translate-y-0.5">
-                            Confirmar
-                        </button>
-                    </div>
-                </form>
+                        <div class="flex gap-3 pt-2">
+                            <button type="button" id="cancelRsvp" class="flex-1 px-4 py-2.5 rounded-lg border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition-colors">
+                                Cancelar
+                            </button>
+                            <button type="submit" class="flex-1 px-4 py-2.5 rounded-lg bg-emerald-600 text-white font-medium hover:bg-emerald-700 shadow-lg shadow-emerald-200 transition-all transform hover:-translate-y-0.5">
+                                Confirmar
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- FOOTER -->
-    <footer class="bg-white border-t border-gray-200 pt-12 pb-8 mt-auto">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <h3 class="text-xl font-bold text-gray-900 mb-4">SMART<span class="text-emerald-600">ACADEMY</span></h3>
-            <p class="text-gray-500 mb-6">Empoderando desarrolladores en todo el mundo con educación de calidad.</p>
-            <div class="flex justify-center space-x-6 mb-8">
-                <a href="#" class="text-gray-400 hover:text-emerald-600 transition"><span class="sr-only">Facebook</span><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd"/></svg></a>
-                <a href="#" class="text-gray-400 hover:text-emerald-600 transition"><span class="sr-only">Twitter</span><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg></a>
+    <!-- FOOTER: La sección consistente y simplificada -->
+    <footer class="bg-gray-900 text-white mt-auto">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <!-- Sección Superior del Footer (Información, Navegación y Redes) -->
+            <div class="grid grid-cols-1 gap-12 md:grid-cols-3 lg:grid-cols-4">
+                
+                <!-- Columna 1: Información del Sitio (Logo y Contacto) -->
+                <div class="col-span-1 md:col-span-1 lg:col-span-2">
+                    <h3 class="text-3xl font-extrabold tracking-tight text-white mb-4">
+                        <span class="text-indigo-400">Mi</span> Sitio Web
+                    </h3>
+                    <p class="text-gray-400 text-sm max-w-sm">
+                        Somos la plataforma líder para [breve descripción de tu sitio]. Comprometidos con la calidad y la información.
+                    </p>
+                    <div class="mt-4 text-sm space-y-2">
+                        <p class="text-indigo-400 font-semibold">Contacto:</p>
+                        <p class="text-gray-400">correo@misitioweb.com</p>
+                        <p class="text-gray-400">+34 123 456 789</p>
+                    </div>
+                </div>
+
+                <!-- Columna 2: Páginas (Navegación) -->
+                <div>
+                    <h3 class="text-sm font-semibold tracking-wider uppercase text-indigo-400">Páginas Principales</h3>
+                    <ul role="list" class="mt-4 space-y-4">
+                        <li><a href="#" class="text-base text-gray-300 hover:text-indigo-400 text-link">Inicio</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-indigo-400 text-link">Acerca de Nosotros</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-indigo-400 text-link">Servicios</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-indigo-400 text-link">Blog</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-indigo-400 text-link">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <!-- Columna 3: Redes Sociales (iconos SVG) -->
+                <div>
+                    <h3 class="text-sm font-semibold tracking-wider uppercase text-indigo-400">Síguenos</h3>
+                    <div class="mt-4 flex space-x-6">
+                        <!-- Icono de X (Twitter) - Versión estándar limpia -->
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300" aria-label="Síguenos en X">
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.901 1.153h3.68c-.687.305-1.425.541-2.193.707.828-.495 1.458-1.277 1.754-2.203-.77.458-1.62.793-2.527.973-.728-.773-1.764-1.258-2.909-1.258-2.196 0-3.98 1.784-3.98 3.98 0 .313.036.618.106.91-3.308-.168-6.236-1.752-8.197-4.156-.342.587-.535 1.273-.535 2.008 0 1.378.703 2.593 1.77 3.308-.653-.021-1.267-.2-1.798-.5v.05c0 1.933 1.376 3.55 3.204 3.921-.334.091-.685.139-1.048.139-.257 0-.507-.025-.75-.072.508 1.59 1.983 2.748 3.737 2.78-1.365 1.07-3.088 1.705-4.978 1.705-.323 0-.64-.018-.953-.056 1.766 1.132 3.861 1.795 6.118 1.795 7.34 0 11.35-6.082 11.35-11.35 0-.173-.004-.345-.012-.516.78-.56 1.458-1.258 1.996-2.046z"/></svg>
+                        </a>
+                        <!-- Icono de LinkedIn (Placeholder) -->
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300" aria-label="Conéctanos en LinkedIn">
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0H5C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM8 19H5V8h3v11zM6.5 6.5A1.5 1.5 0 1 1 8 5a1.5 1.5 0 0 1-1.5 1.5zM20 19h-3v-5.64c0-1.3-.47-2.19-1.63-2.19-1.16 0-1.85.79-1.85 2.19V19h-3V8h3v1.89c.47-.7 1.22-1.89 3.32-1.89 2.42 0 4.25 1.56 4.25 4.96V19z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
             </div>
-            <p class="text-sm text-gray-400">&copy; 2024 SmartAcademy. Todos los derechos reservados.</p>
+
+            <!-- Sección Inferior del Footer (Derechos de Autor) -->
+            <div class="mt-12 border-t border-gray-700 pt-8">
+                <p class="text-base text-center text-gray-400">
+                    &copy; 2024 Mi Proyecto GitHub Pages. Todos los derechos reservados.
+                </p>
+                <p class="text-sm text-center text-gray-500 mt-1">
+                    Política de Privacidad | Términos de Servicio
+                </p>
+            </div>
         </div>
     </footer>
 
@@ -471,6 +529,7 @@
                 closeModal();
                 rsvpForm.reset();
             });
+            
         });
     </script>
 </body>

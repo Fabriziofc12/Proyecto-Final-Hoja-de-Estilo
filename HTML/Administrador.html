@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel de Administración | SmartAcademy</title>
+    <!-- Incluimos el CDN de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Incluimos d3.js para la visualización de datos -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <!-- Configuraciones de Tailwind y Fuente -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Fondo gris claro */
+        }
+        
+        /* Estilo para el enlace activo en el menú lateral */
+        .sidebar-link.active {
+            background-color: #059669; /* emerald-600 */
+            color: white;
+            font-weight: 600;
+            border-radius: 0.5rem; /* rounded-lg */
+        }
+        .sidebar-link:hover:not(.active) {
+            background-color: #d1fae5; /* emerald-100 */
+            color: #059669; /* emerald-600 */
+        }
+        .content-section {
+            opacity: 0;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body class="flex min-h-screen">
+
+    <!-- 1. BARRA LATERAL (Sidebar) -->
+    <aside id="sidebar" class="fixed inset-y-0 left-0 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out w-64 bg-gray-900 z-40 p-4 flex flex-col shadow-xl">
+        
+        <!-- Logo y Título -->
+        <div class="flex items-center flex-shrink-0 mb-8 border-b border-gray-700 pb-4">
+            <div class="bg-emerald-600 p-2 rounded-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+            </div>
+            <span class="text-2xl font-extrabold text-white ml-3 tracking-tight">Admin <span class="text-emerald-500">Panel</span></span>
+        </div>
+
+        <!-- Navegación del Panel -->
+        <nav class="flex-grow space-y-2">
+            <a href="#dashboard" data-section="dashboard" class="sidebar-link active flex items-center px-4 py-3 text-gray-300 transition-colors">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7-4h14"></path></svg>
+                Dashboard
+            </a>
+            <a href="#usuarios" data-section="usuarios" class="sidebar-link flex items-center px-4 py-3 text-gray-300 transition-colors">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M12 10a4 4 0 110-8 4 4 0 010 8z"></path></svg>
+                Gestión de Usuarios
+            </a>
+            <a href="#cursos" data-section="cursos" class="sidebar-link flex items-center px-4 py-3 text-gray-300 transition-colors">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                Gestión de Cursos
+            </a>
+            <a href="#eventos" data-section="eventos" class="sidebar-link flex items-center px-4 py-3 text-gray-300 transition-colors">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                Gestión de Eventos
+            </a>
+        </nav>
+        
+        <!-- Pie de página de la barra lateral -->
+        <div class="mt-auto border-t border-gray-700 pt-4">
+            <!-- Botón con ID para la función de cerrar sesión -->
+            <button id="logout-btn" class="flex items-center w-full px-4 py-3 text-left text-red-400 hover:text-red-300 hover:bg-gray-800 rounded-lg transition-colors">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                Cerrar Sesión
+            </button>
+        </div>
+    </aside>
+
+    <!-- Overlay para el Sidebar en móvil -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black opacity-0 lg:hidden z-30 transition-opacity duration-300 pointer-events-none"></div>
+
+    <!-- 2. CONTENIDO PRINCIPAL (Main Content) -->
+    <div class="flex-grow lg:ml-64 p-4 md:p-8">
+        
+        <!-- Header del Contenido Principal y Botón de Menú Móvil -->
+        <header class="flex justify-between items-center mb-8 pb-4 border-b border-gray-300 sticky top-0 bg-white z-20 shadow-sm lg:shadow-none">
+            <h1 id="main-title" class="text-3xl font-bold text-gray-900">Dashboard</h1>
+            
+            <button id="menu-toggle-btn" class="lg:hidden text-gray-700 hover:text-emerald-600 p-2 rounded-full">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </header>
+
+        <!-- Contenedor de Secciones -->
+        <div id="content-container" class="space-y-10">
+
+            <!-- ####################################################################### -->
+            <!-- SECCIÓN 1: DASHBOARD Y ESTADÍSTICAS -->
+            <!-- ####################################################################### -->
+            <div id="dashboard" class="content-section">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6">Métricas Clave</h2>
+                
+                <!-- Tarjetas de Métricas -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Tarjeta 1: Total Usuarios -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-b-4 border-emerald-500 hover:shadow-xl transition-shadow">
+                        <p class="text-sm font-medium text-gray-500">Total Usuarios</p>
+                        <p class="text-3xl font-bold text-gray-900 mt-1">1,245</p>
+                        <p class="text-xs text-emerald-600 mt-2 flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+                            +5.2% desde el mes pasado
+                        </p>
+                    </div>
+                    
+                    <!-- Tarjeta 2: Cursos Activos -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-b-4 border-blue-500 hover:shadow-xl transition-shadow">
+                        <p class="text-sm font-medium text-gray-500">Cursos Publicados</p>
+                        <p class="text-3xl font-bold text-gray-900 mt-1">48</p>
+                        <p class="text-xs text-blue-600 mt-2 flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                            3 Nuevos este mes
+                        </p>
+                    </div>
+
+                    <!-- Tarjeta 3: Ingresos (Simulado) -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-b-4 border-amber-500 hover:shadow-xl transition-shadow">
+                        <p class="text-sm font-medium text-gray-500">Ingresos (Mes)</p>
+                        <p class="text-3xl font-bold text-gray-900 mt-1">$12,500</p>
+                        <p class="text-xs text-amber-600 mt-2 flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8V6m0 10v2"></path></svg>
+                            Objetivo cumplido al 85%
+                        </p>
+                    </div>
+                    
+                    <!-- Tarjeta 4: Confirmaciones Eventos -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-b-4 border-pink-500 hover:shadow-xl transition-shadow">
+                        <p class="text-sm font-medium text-gray-500">Confirmaciones Eventos</p>
+                        <p class="text-3xl font-bold text-gray-900 mt-1">540</p>
+                        <p class="text-xs text-pink-600 mt-2 flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            Evento más popular: IA
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Gráficos Estadísticos -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-10">
+                    
+                    <!-- Gráfico 1: Tendencia de Inscripciones -->
+                    <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-lg">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Tendencia de Inscripciones (Últimos 6 meses)</h3>
+                        <div id="chart-enrollments" class="w-full h-80">
+                            <!-- D3.js Line Chart will be rendered here -->
+                        </div>
+                    </div>
+
+                    <!-- Gráfico 2: Distribución por Tipo de Usuario -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Distribución por Rol</h3>
+                        <div id="chart-roles" class="w-full h-80 flex justify-center items-center">
+                            <!-- D3.js Pie Chart will be rendered here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ####################################################################### -->
+            <!-- SECCIÓN 2: GESTIÓN DE USUARIOS -->
+            <!-- ####################################################################### -->
+            <div id="usuarios" class="content-section hidden">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6">Gestión de Usuarios</h2>
+                
+                <div class="bg-white p-6 rounded-xl shadow-lg overflow-x-auto">
+                    <!-- Barra de acciones -->
+                    <div class="flex justify-between items-center mb-4">
+                        <input type="text" placeholder="Buscar usuario..." class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-emerald-500 focus:border-emerald-500" />
+                        <button class="bg-emerald-600 text-white font-medium px-4 py-2 rounded-lg hover:bg-emerald-700 transition flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                            Nuevo Usuario
+                        </button>
+                    </div>
+
+                    <!-- Tabla de Usuarios -->
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rol</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">Andrea López</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">andrea.l@mail.com</td>
+                                <td class="px-6 py-4 whitespace-nowrap">Admin</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-emerald-100 text-emerald-800">Activo</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <button class="text-blue-600 hover:text-blue-900">Editar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">Javier Rojas</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">javier.r@mail.com</td>
+                                <td class="px-6 py-4 whitespace-nowrap">Estudiante</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Inactivo</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <button class="text-blue-600 hover:text-blue-900">Editar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ####################################################################### -->
+            <!-- SECCIÓN 3: GESTIÓN DE CURSOS -->
+            <!-- ####################################################################### -->
+            <div id="cursos" class="content-section hidden">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6">Gestión de Cursos</h2>
+                <div class="bg-white p-6 rounded-xl shadow-lg overflow-x-auto">
+                    <div class="flex justify-between items-center mb-4">
+                        <input type="text" placeholder="Buscar curso..." class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-emerald-500 focus:border-emerald-500" />
+                        <button class="bg-emerald-600 text-white font-medium px-4 py-2 rounded-lg hover:bg-emerald-700 transition flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                            Nuevo Curso
+                        </button>
+                    </div>
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Título</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Instructor</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Inscritos</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Desarrollo Web con React y Node</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Carlos Díaz</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">145</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-emerald-100 text-emerald-800">Publicado</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <button class="text-blue-600 hover:text-blue-900">Editar</button> /
+                                    <button class="text-red-600 hover:text-red-900">Eliminar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Data Science con Python</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Laura Montes</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">82</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Borrador</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <button class="text-blue-600 hover:text-blue-900">Editar</button> /
+                                    <button class="text-red-600 hover:text-red-900">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ####################################################################### -->
+            <!-- SECCIÓN 4: GESTIÓN DE EVENTOS -->
+            <!-- ####################################################################### -->
+            <div id="eventos" class="content-section hidden">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6">Gestión de Eventos</h2>
+                <div class="bg-white p-6 rounded-xl shadow-lg overflow-x-auto">
+                    <div class="flex justify-between items-center mb-4">
+                        <input type="text" placeholder="Buscar evento..." class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-emerald-500 focus:border-emerald-500" />
+                        <button class="bg-emerald-600 text-white font-medium px-4 py-2 rounded-lg hover:bg-emerald-700 transition flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                            Nuevo Evento
+                        </button>
+                    </div>
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Título del Evento</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Asistentes Confirmados</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Webinar: El futuro de la Ciberseguridad</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">15/09/2024</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">250</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <button class="text-blue-600 hover:text-blue-900">Ver Detalles</button> /
+                                    <button class="text-red-600 hover:text-red-900">Cancelar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Taller Presencial de Cloud</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">20/10/2024</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">85</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <button class="text-blue-600 hover:text-blue-900">Ver Detalles</button> /
+                                    <button class="text-red-600 hover:text-red-900">Cancelar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Script JavaScript para la funcionalidad y los gráficos -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            const menuToggleBtn = document.getElementById('menu-toggle-btn');
+            const sidebarLinks = document.querySelectorAll('.sidebar-link');
+            const contentSections = document.querySelectorAll('.content-section');
+            const mainTitle = document.getElementById('main-title');
+            const logoutBtn = document.getElementById('logout-btn'); // Obtenemos el nuevo botón
+
+            // --- 1. Lógica del Sidebar y Menú Móvil ---
+
+            function toggleSidebar() {
+                sidebar.classList.toggle('-translate-x-full');
+                overlay.classList.toggle('opacity-0');
+                overlay.classList.toggle('pointer-events-none');
+            }
+
+            // Abrir/Cerrar en móvil
+            if (menuToggleBtn && sidebar && overlay) {
+                menuToggleBtn.addEventListener('click', toggleSidebar);
+                overlay.addEventListener('click', toggleSidebar);
+            }
+
+            // --- REDIRECCIÓN DE CERRAR SESIÓN ---
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', () => {
+                    // En una aplicación real, aquí iría la lógica de cerrar la sesión (limpiar tokens, etc.)
+                    console.log('Cerrando sesión de Admin...');
+                    // Redirigir al index.html
+                    window.location.href = 'index.html'; 
+                });
+            }
+
+            // --- 2. Lógica de Navegación del Dashboard ---
+
+            function showSection(sectionId) {
+                // 1. Ocultar todas las secciones
+                contentSections.forEach(section => {
+                    section.classList.add('hidden');
+                    section.style.animation = 'none'; // Reset animation
+                });
+
+                // 2. Mostrar la sección activa
+                const activeSection = document.getElementById(sectionId);
+                if (activeSection) {
+                    activeSection.classList.remove('hidden');
+                    activeSection.style.animation = 'fadeIn 0.4s ease-out forwards';
+                    
+                    // 3. Actualizar el título principal
+                    const link = document.querySelector(`.sidebar-link[data-section="${sectionId}"]`);
+                    if (link) {
+                         mainTitle.textContent = link.textContent.trim();
+                    }
+
+                    // 4. Si es el dashboard, renderizar los gráficos
+                    if (sectionId === 'dashboard') {
+                        renderEnrollmentChart();
+                        renderRoleChart();
+                    }
+                }
+
+                // 5. Actualizar el estado 'active' del menú
+                sidebarLinks.forEach(link => {
+                    if (link.getAttribute('data-section') === sectionId) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+                
+                // 6. Cerrar sidebar si está en móvil
+                if (window.innerWidth < 1024) {
+                    toggleSidebar();
+                }
+            }
+
+            // Manejar clics en el menú lateral
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const sectionId = link.getAttribute('data-section');
+                    window.location.hash = sectionId;
+                });
+            });
+
+            // Manejar navegación inicial o por URL hash
+            const initialHash = window.location.hash.substring(1) || 'dashboard';
+            showSection(initialHash);
+
+            // Escuchar cambios de hash
+            window.addEventListener('hashchange', () => {
+                const newHash = window.location.hash.substring(1) || 'dashboard';
+                showSection(newHash);
+            });
+            
+            // --- 3. Lógica de Gráficos (D3.js) ---
+
+            // Gráfico 1: Barras/Líneas - Tendencia de Inscripciones
+            function renderEnrollmentChart() {
+                const data = [
+                    { month: "Ene", value: 180 },
+                    { month: "Feb", value: 250 },
+                    { month: "Mar", value: 320 },
+                    { month: "Abr", value: 290 },
+                    { month: "May", value: 410 },
+                    { month: "Jun", value: 380 }
+                ];
+
+                const container = d3.select("#chart-enrollments");
+                container.select("svg").remove(); // Limpiar si ya existe
+
+                const margin = { top: 20, right: 30, bottom: 40, left: 50 };
+                const width = container.node().clientWidth - margin.left - margin.right;
+                const height = container.node().clientHeight - margin.top - margin.bottom;
+
+                const svg = container.append("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+                // Escalas
+                const x = d3.scaleBand()
+                    .range([0, width])
+                    .domain(data.map(d => d.month))
+                    .padding(0.2);
+
+                const y = d3.scaleLinear()
+                    .domain([0, d3.max(data, d => d.value) + 100])
+                    .range([height, 0]);
+
+                // Ejes
+                svg.append("g")
+                    .attr("transform", `translate(0,${height})`)
+                    .call(d3.axisBottom(x));
+
+                svg.append("g")
+                    .call(d3.axisLeft(y).ticks(5).tickFormat(d3.format("d")));
+
+                // Título del Eje Y
+                svg.append("text")
+                    .attr("class", "y label")
+                    .attr("text-anchor", "end")
+                    .attr("y", -35)
+                    .attr("x", -height / 2 + 30)
+                    .attr("dy", ".75em")
+                    .attr("transform", "rotate(-90)")
+                    .style("font-size", "12px")
+                    .style("fill", "#6b7280") /* text-gray-500 */
+                    .text("Nuevas Inscripciones");
+
+                // Barras (Bar Chart)
+                svg.selectAll(".bar")
+                    .data(data)
+                    .enter().append("rect")
+                    .attr("class", "bar")
+                    .attr("x", d => x(d.month))
+                    .attr("width", x.bandwidth())
+                    .attr("y", d => y(d.value))
+                    .attr("height", d => height - y(d.value))
+                    .attr("fill", "#10b981") // emerald-500
+                    .attr("rx", 3); // Borde redondeado
+            }
+
+            // Gráfico 2: Torta - Distribución por Rol
+            function renderRoleChart() {
+                const data = [
+                    { name: "Estudiantes", value: 85, color: "#059669" }, // emerald-600
+                    { name: "Instructores", value: 10, color: "#3b82f6" }, // blue-500
+                    { name: "Administradores", value: 5, color: "#f59e0b" }  // amber-500
+                ];
+
+                const container = d3.select("#chart-roles");
+                container.select("svg").remove(); // Limpiar si ya existe
+
+                const radius = Math.min(container.node().clientWidth, container.node().clientHeight) / 2 - 20;
+
+                const svg = container.append("svg")
+                    .attr("width", container.node().clientWidth)
+                    .attr("height", container.node().clientHeight)
+                    .append("g")
+                    .attr("transform", `translate(${container.node().clientWidth / 2}, ${container.node().clientHeight / 2})`);
+
+                const pie = d3.pie()
+                    .value(d => d.value)
+                    .sort(null);
+
+                const arc = d3.arc()
+                    .innerRadius(radius * 0.6) // Rosquilla
+                    .outerRadius(radius);
+
+                const outerArc = d3.arc()
+                    .innerRadius(radius * 0.9)
+                    .outerRadius(radius * 0.9);
+
+                // Dibujar la Rosquilla
+                svg.selectAll('path')
+                    .data(pie(data))
+                    .enter()
+                    .append('path')
+                    .attr('d', arc)
+                    .attr('fill', d => d.data.color)
+                    .attr('stroke', 'white')
+                    .style('stroke-width', '2px');
+                
+                // Etiquetas de Porcentaje
+                svg.selectAll('text')
+                    .data(pie(data))
+                    .enter()
+                    .append('text')
+                    .attr("transform", d => `translate(${arc.centroid(d)})`)
+                    .attr("text-anchor", "middle")
+                    .style("fill", "white")
+                    .style("font-weight", "bold")
+                    .style("font-size", "14px")
+                    .text(d => `${d.data.value}%`);
+                    
+                // Leyenda (fuera del gráfico)
+                const legend = container.select("svg").append("g")
+                    .attr("transform", `translate(10, 20)`);
+                    
+                legend.selectAll(".legend-item")
+                    .data(data)
+                    .enter()
+                    .append("g")
+                    .attr("class", "legend-item")
+                    .attr("transform", (d, i) => `translate(0, ${i * 20})`)
+                    .each(function(d, i) {
+                        d3.select(this).append("rect")
+                            .attr("width", 10)
+                            .attr("height", 10)
+                            .attr("fill", d.color)
+                            .attr("rx", 2);
+
+                        d3.select(this).append("text")
+                            .attr("x", 15)
+                            .attr("y", 9)
+                            .style("font-size", "12px")
+                            .style("fill", "#374151") /* text-gray-700 */
+                            .text(d.name);
+                    });
+            }
+
+            // Renderizar gráficos al inicio si el dashboard es la vista predeterminada
+            if (initialHash === 'dashboard') {
+                renderEnrollmentChart();
+                renderRoleChart();
+            }
+
+            // Manejar redimensionamiento para que los gráficos se adapten
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    if (document.getElementById('dashboard').classList.contains('hidden') === false) {
+                        renderEnrollmentChart();
+                        renderRoleChart();
+                    }
+                }, 250);
+            });
+        });
+    </script>
+</body>
+
+</html>

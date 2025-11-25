@@ -1,0 +1,113 @@
+/****************************
+ * VARIABLES SASS
+ ****************************/
+$font-family-base: 'Inter', sans-serif;
+$color-primary: #059669; // emerald-600
+$color-secondary: #10b981; // emerald-500
+$color-background-dark: #111827; // gray-900 (Fondo base)
+$color-background-deeper: #0d1117; // Casi negro
+$color-white: #ffffff;
+$color-gray-text: #6b7280; // gray-500
+$color-gray-border: #d1d5db; // gray-300
+$color-error: #ef4444; // red-600
+
+/****************************
+ * MIXINS
+ ****************************/
+@mixin input-focus-style() {
+    &:focus {
+        --tw-ring-opacity: 1;
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3); // focus-ring-3 emerald-200 (ajustado para SCSS)
+        border-color: $color-secondary;
+        outline: none;
+    }
+}
+
+/****************************
+ * ANIMACIONES
+ ****************************/
+@keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/****************************
+ * ESTILOS GLOBALES
+ ****************************/
+body {
+    font-family: $font-family-base;
+    margin: 0;
+    background-color: $color-background-deeper;
+}
+
+/****************************
+ * CONTENEDOR PRINCIPAL - FONDO DINÁMICO
+ ****************************/
+.login-bg {
+    /* Fondo de patrón sutil para un aspecto tecnológico */
+    background-image: 
+        radial-gradient(#1f2937 1px, transparent 1px), 
+        radial-gradient(#1f2937 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: 0 0, 20px 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0;
+    
+    /* Sutil capa esmeralda en el fondo */
+    background-color: $color-background-dark; 
+    background-blend-mode: multiply;
+}
+
+/****************************
+ * TARJETA DE LOGIN
+ ****************************/
+.login-card {
+    /* Aplicación de animación */
+    animation: fadeInScale 0.5s ease-out forwards;
+    transition: transform 0.3s ease;
+    
+    /* Sombra profunda para el efecto flotante */
+    box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.5), /* Sombra principal */
+        0 0 100px rgba($color-primary, 0.2); /* Resplandor esmeralda */
+
+    &:hover {
+        transform: translateY(-4px);
+    }
+}
+
+/****************************
+ * FORMULARIO Y CAMPOS
+ ****************************/
+.input-group {
+    /* Estilo para contener el label, input y el SVG */
+    position: relative;
+
+    input {
+        /* Aplica el mixin de foco y maneja el padding del icono */
+        padding-left: 3rem !important;
+        @include input-focus-style();
+    }
+    
+    svg {
+        /* Posiciona el icono */
+        position: absolute;
+        width: 1.25rem; /* w-5 */
+        height: 1.25rem; /* h-5 */
+        color: #9ca3af; /* gray-400 */
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none; /* Asegura que el SVG no interfiera con el input */
+    }
+}
+
+/* Estilo para mensajes de error de Thymeleaf (simulados) */
+.th-error {
+    color: $color-error;
+    font-size: 0.875rem; 
+    margin-top: 0.25rem;
+}

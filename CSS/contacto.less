@@ -6,15 +6,14 @@
 @color-texto: #1f2937;
 @color-blanco: #ffffff;
 @color-borde: #d1d5db;
-@color-fondo-oscuro: #111827; /* Nuevo color para el fondo general (gray-900) */
-@color-texto-oscuro: #d1d5db; /* Nuevo color para texto en fondo oscuro */
+@color-fondo-oscuro: #111827;
+@color-texto-oscuro: #d1d5db; 
 @transicion-base: all 0.3s ease;
 
 /****************************
  * MIXINS
  ****************************/
 .sombra(@nivel: 0.1) {
-  /* Sombra más fuerte para el tema oscuro */
   box-shadow: 0 10px 30px rgba(0, 0, 0, @nivel * 1.5);
 }
 
@@ -29,7 +28,6 @@
   &:focus {
     border-color: @color-primario;
     outline: none;
-    /* Efecto de anillo de foco */
     box-shadow: 0 0 0 3px rgba(0, 175, 102, 0.3);
   }
 }
@@ -79,7 +77,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Fondo con sutil gradiente radial para el tema oscuro */
   background: radial-gradient(circle at top left, rgba(0, 175, 102, 0.1) 0%, transparent 50%);
 }
 
@@ -99,7 +96,7 @@ body {
   color: @color-blanco;
   border-radius: 1rem;
   padding: 3rem;
-  .sombra(0.3); /* Usa el mixin de sombra fuerte */
+  .sombra(0.3); 
   display: flex;
   flex-direction: column;
   justify-content: center;

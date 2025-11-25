@@ -1,0 +1,96 @@
+@charset "UTF-8";
+/****************************
+ * VARIABLES SASS
+ ****************************/
+/****************************
+ * MIXINS
+ ****************************/
+/****************************
+ * ANIMACIONES
+ ****************************/
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+/****************************
+ * ESTILOS GLOBALES
+ ****************************/
+body {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  background-color: #0d1117;
+}
+
+/****************************
+ * CONTENEDOR PRINCIPAL - FONDO DINÁMICO
+ ****************************/
+.login-bg {
+  /* Fondo de patrón sutil para un aspecto tecnológico */
+  background-image: radial-gradient(#1f2937 1px, transparent 1px), radial-gradient(#1f2937 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: 0 0, 20px 20px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
+  /* Sutil capa esmeralda en el fondo */
+  background-color: #111827;
+  background-blend-mode: multiply;
+}
+
+/****************************
+ * TARJETA DE LOGIN
+ ****************************/
+.login-card {
+  /* Aplicación de animación */
+  animation: fadeInScale 0.5s ease-out forwards;
+  transition: transform 0.3s ease;
+  /* Sombra profunda para el efecto flotante */
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 100px rgba(5, 150, 105, 0.2); /* Resplandor esmeralda */
+}
+.login-card:hover {
+  transform: translateY(-4px);
+}
+
+/****************************
+ * FORMULARIO Y CAMPOS
+ ****************************/
+.input-group {
+  /* Estilo para contener el label, input y el SVG */
+  position: relative;
+}
+.input-group input {
+  /* Aplica el mixin de foco y maneja el padding del icono */
+  padding-left: 3rem !important;
+}
+.input-group input:focus {
+  --tw-ring-opacity: 1;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
+  border-color: #10b981;
+  outline: none;
+}
+.input-group svg {
+  /* Posiciona el icono */
+  position: absolute;
+  width: 1.25rem; /* w-5 */
+  height: 1.25rem; /* h-5 */
+  color: #9ca3af; /* gray-400 */
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; /* Asegura que el SVG no interfiera con el input */
+}
+
+/* Estilo para mensajes de error de Thymeleaf (simulados) */
+.th-error {
+  color: #ef4444;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}/*# sourceMappingURL=login.css.map */
