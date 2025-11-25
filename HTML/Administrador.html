@@ -6,40 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Panel de Administración | SmartAcademy</title>
     <!-- Incluimos el CDN de Tailwind CSS -->
-     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/CSS/output.css">
+    <link rel="stylesheet" href="/Proyecto-Final-Hoja-de-Estilo/CSS/output.css">
     <!-- Incluimos d3.js para la visualización de datos -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
 
-    <!-- Configuraciones de Tailwind y Fuente -->
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6; /* Fondo gris claro */
-        }
-        
-        /* Estilo para el enlace activo en el menú lateral */
-        .sidebar-link.active {
-            background-color: #059669; /* emerald-600 */
-            color: white;
-            font-weight: 600;
-            border-radius: 0.5rem; /* rounded-lg */
-        }
-        .sidebar-link:hover:not(.active) {
-            background-color: #d1fae5; /* emerald-100 */
-            color: #059669; /* emerald-600 */
-        }
-        .content-section {
-            opacity: 0;
-            animation: fadeIn 0.4s ease-out forwards;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+   
 </head>
 
 <body class="flex min-h-screen">
