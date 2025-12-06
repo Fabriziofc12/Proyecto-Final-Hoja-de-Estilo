@@ -12,6 +12,27 @@
     <link rel="stylesheet" href="/CSS/cursos.css">
     <link rel="stylesheet" href="/Proyecto-Final-Hoja-de-Estilo/CSS/output.css">
     <link rel="stylesheet" href="/CSS/output.css">
+    
+    <style>
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+                box-shadow: 0 0 20px rgba(16, 185, 129, 0.6);
+            }
+            50% {
+                opacity: 0.7;
+                box-shadow: 0 0 30px rgba(16, 185, 129, 0.9);
+            }
+        }
+
+        .btn-empezar {
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        .btn-empezar:hover {
+            animation: none;
+        }
+    </style>
 </head>
 
 <body class="cursos-page">
@@ -41,7 +62,7 @@
 
                     <div id="desktop-auth-guest" class="flex items-center gap-3">
                         <a href="login.html" class="text-white bg-transparent border border-emerald-600 px-4 py-2 rounded-md hover:bg-emerald-600/20 transition">Login</a>
-                        <a href="registro.html" class="bg-emerald-600 text-white px-5 py-2 rounded-md font-medium shadow-lg shadow-emerald-600/30 hover:bg-emerald-500 hover:shadow-emerald-500/40 hover:-translate-y-0.5 transition-all duration-300">
+                        <a href="registro.html" class="btn-empezar bg-emerald-600 text-white px-5 py-2 rounded-md font-medium shadow-lg shadow-emerald-600/30 hover:bg-emerald-500 hover:shadow-emerald-500/40 hover:-translate-y-0.5 transition-all duration-300">
                             Empezar
                         </a>
                     </div>
